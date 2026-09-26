@@ -117,6 +117,28 @@
       settingsComp.render();
 
       console.log('RANZ GAMING Mobile Legends Overlay initialized successfully!');
+
+      // Auto-scale to ensure 100% perfect fit on any TikTok Live Studio viewport (9:16 portrait)
+      function autoFitVertical() {
+        const viewport = document.getElementById('overlayViewport');
+        if (!viewport) return;
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        if (w > 0 && h > 0) {
+          const scaleW = w / 1080;
+          const scaleH = h / 1920;
+          const finalScale = Math.min(scaleW, scaleH);
+          if (Math.abs(finalScale - 1) > 0.01) {
+            viewport.style.transform = scale();
+            viewport.style.transformOrigin = 'top center';
+          } else {
+            viewport.style.transform = 'none';
+          }
+        }
+      }
+      window.addEventListener('resize', autoFitVertical);
+      autoFitVertical();
+
     });
   </script>
 </body>
