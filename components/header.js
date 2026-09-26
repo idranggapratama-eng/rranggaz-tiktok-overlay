@@ -1,6 +1,7 @@
 /**
- * HEADER COMPONENT
- * Renders RANZ GAMING branding, status, clock, and viewer counter.
+ * HEADER COMPONENT (MAGIC CHESS EDITION)
+ * Renders Official MLBB Logo, RANZ GAMING, Animated Little Commander Hero Icon,
+ * Live status, and dynamic viewer counter.
  */
 
 import { streamConfig } from '../config/streamConfig.js';
@@ -17,12 +18,12 @@ export class HeaderComponent {
 
   render() {
     this.container.innerHTML = `
-      <div class="header-container">
+      <div class="header-container magic-chess-theme">
         <!-- Top Status Bar -->
         <div class="header-top-bar">
           <div class="status-live-badge">
             <span class="live-pulse-dot"></span>
-            <span>LIVE STREAM</span>
+            <span>LIVE MAGIC CHESS</span>
           </div>
 
           <div class="header-clock" id="headerClock">00:00:00</div>
@@ -33,19 +34,44 @@ export class HeaderComponent {
           </div>
         </div>
 
-        <!-- Main Branding Identity -->
+        <!-- Main Branding Identity with MLBB Logo & Animated Hero Icon -->
         <div class="header-branding">
-          <div class="brand-left">
-            <h1 class="brand-streamer-name" id="brandStreamerName">${streamConfig.streamerName}</h1>
-            <div class="brand-game-title">${streamConfig.gameTitle}</div>
+          <!-- Left: MLBB Official Logo + RANZ GAMING -->
+          <div class="brand-left-with-logo">
+            <div class="mlbb-logo-wrapper">
+              <img src="${streamConfig.logo.src}" alt="MLBB Logo" class="mlbb-gold-crest">
+            </div>
+
+            <div class="brand-text-stack">
+              <h1 class="brand-streamer-name" id="brandStreamerName">${streamConfig.streamerName}</h1>
+              <div class="brand-game-title">
+                <span>⚔️</span> ${streamConfig.gameTitle}
+              </div>
+              <div class="commander-tag-pill">
+                <span class="commander-rank-stars">⭐⭐⭐⭐⭐</span>
+                <span>MYTHIC COMMANDER</span>
+              </div>
+            </div>
           </div>
 
-          <div class="brand-right">
-            <div class="tiktok-handle-pill" id="brandTiktokHandle">
-              <span>🎵</span>
-              <span>${streamConfig.tiktokUsername}</span>
+          <!-- Right: ANIMATED MAGIC CHESS COMMANDER HERO ICON -->
+          <div class="brand-right-commander">
+            <div class="commander-avatar-portal">
+              <div class="portal-ring-outer"></div>
+              <div class="portal-ring-runes"></div>
+              <div class="commander-avatar-inner">
+                <img src="${streamConfig.hero.src}" alt="Magic Chess Commander" class="commander-avatar-img">
+              </div>
+              <div class="portal-floating-star">★</div>
             </div>
-            <div class="tagline-text">${streamConfig.tagline}</div>
+
+            <div class="commander-social-stack">
+              <div class="tiktok-handle-pill" id="brandTiktokHandle">
+                <span>🎵</span>
+                <span>${streamConfig.tiktokUsername}</span>
+              </div>
+              <div class="tagline-text">${streamConfig.tagline}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -66,12 +92,11 @@ export class HeaderComponent {
       const s = String(now.getSeconds()).padStart(2, '0');
       if (this.clockEl) this.clockEl.textContent = `${h}:${m}:${s}`;
     };
-    setInterval(update, 1000);
-    update();
+    setInterval(updateClock, 1000);
+    updateClock();
   }
 
   initSubscriptions() {
-    // Dynamic viewer count subscription
     streamState.subscribe('viewerCount', (newCount) => {
       if (!this.viewerCounterEl) return;
       if (newCount === null || newCount === undefined) {
@@ -83,7 +108,6 @@ export class HeaderComponent {
       }
     });
 
-    // Live status toggle
     streamState.subscribe('liveStatus', (isLive) => {
       const liveBadge = this.container.querySelector('.status-live-badge');
       if (liveBadge) {

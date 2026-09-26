@@ -1,6 +1,6 @@
 /**
- * TICKER BAR COMPONENT
- * Renders smooth continuous moving marquee below the gameplay frame.
+ * TICKER BAR COMPONENT (MAGIC CHESS EDITION)
+ * Renders smooth continuous moving marquee tailored to Magic Chess live stream.
  */
 
 import { streamConfig } from '../config/streamConfig.js';
@@ -13,15 +13,15 @@ export class TickerBarComponent {
   render() {
     this.container.innerHTML = `
       <div class="ticker-ribbon">
-        <div class="ticker-title-chip">📢 INFO</div>
+        <div class="ticker-title-chip">⚔️ MAGIC CHESS</div>
         <div class="ticker-viewport">
           <div class="ticker-content" id="tickerTextContent">
-            🔥 WELCOME TO LIVE STREAM <span class="highlight-cyan">${streamConfig.streamerName}</span>!  •  
-            <span class="highlight-gold">TAP-TAP LAYAR & SHARE YA GUYS!</span>  •  
+            🔥 WELCOME TO LIVE MAGIC CHESS <span class="highlight-cyan">${streamConfig.streamerName}</span>!  •  
+            <span class="highlight-gold">SPAM BUILD & REKOMENDASI SINERGI DI CHAT!</span>  •  
             TIKTOK: <span class="highlight-cyan">${streamConfig.tiktokUsername}</span>  •  
+            TAP-TAP LAYAR & SHARE YA GUYS!  •  
             SUPPORT VIA SAWERIA: <span class="highlight-cyan">${streamConfig.donation.saweriaUrl}</span>  •  
-            <span class="highlight-gold">${streamConfig.tagline}</span>  •  
-            MABAR? SPAM NICK & ID DI CHAT! 🔥
+            <span class="highlight-gold">TARGET HARI INI: PUSH MYTHICAL GLORY COMMANDER! 🏆</span>
           </div>
         </div>
       </div>

@@ -1,18 +1,19 @@
 /**
  * RANZ GAMING STREAM OVERLAY CONFIGURATION
- * Professional Esports Mobile Legends Overlay for TikTok Live
+ * Magic Chess Mobile Legends Esports Edition
  */
 
 export const streamConfig = {
   // Streamer Branding
   streamerName: "RANZ GAMING",
-  gameTitle: "MOBILE LEGENDS: BANG BANG",
+  gameTitle: "MOBILE LEGENDS: MAGIC CHESS",
+  commanderName: "COMMANDER ALUCARD",
   tiktokUsername: "@rranggaz_",
   tagline: "PLAY • IMPROVE • BE BETTER",
 
   // Theme Colors
   theme: {
-    name: "blue-gold",
+    name: "magic-chess-cosmic",
     bgDark: "#05070B",
     electricBlue: "#00e5ff",
     electricBlueGlow: "rgba(0, 229, 255, 0.45)",
@@ -25,14 +26,19 @@ export const streamConfig = {
   // Display Mode: 'FULL_OVERLAY' | 'TRANSPARENT_OVERLAY' | 'PREVIEW_MODE'
   mode: "FULL_OVERLAY",
 
-  // Hero Asset
+  // Magic Chess Commander Hero Asset
   hero: {
     enabled: true,
-    name: "Alucard / Warrior",
-    src: "assets/heroes/hero_warrior.png",
-    auraColor: "rgba(0, 229, 255, 0.35)",
-    floatingSpeed: 3.5, // seconds
-    scaleAmplitude: 0.03
+    name: "Commander Alucard",
+    src: "assets/heroes/commander_hero.png",
+    auraColor: "rgba(0, 229, 255, 0.4)",
+    floatingSpeed: 2.8,
+    scaleAmplitude: 0.04
+  },
+
+  // MLBB Crest Logo
+  logo: {
+    src: "assets/icons/mlbb_logo.png"
   },
 
   // Animation Switches
@@ -44,7 +50,8 @@ export const streamConfig = {
     particleSystem: true,
     liveIndicatorPulse: true,
     equalizer: true,
-    particleCount: 32 // Capped for 60 FPS performance
+    commanderSpin: true,
+    particleCount: 32
   },
 
   // Panel Visibility
