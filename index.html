@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RRANGGAZ_ Live Overlay V2 (Clean & Pro)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@600;700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ========================================================
+       RRANGGAZ_ TIKTOK LIVE HUD V2 - CLEAN, FIT & EPIC (60 FPS)
+       Designed specifically for TikTok Live Studio & OBS
+       ======================================================== */
+
+    :root {
+      --cyan: #00f0ff;
+      --purple: #9d00ff;
+      --pink: #ff007f;
+      --gold: #ffd700;
+      --glow-cyan: 0 0 15px rgba(0, 240, 255, 0.7), 0 0 30px rgba(0, 240, 255, 0.4);
+      --font-hud: 'Orbitron', -apple-system, sans-serif;
+      --font-sub: 'Rajdhani', sans-serif;
+      --font-ui: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: transparent; /* Allows transparency in OBS */
+      font-family: var(--font-ui);
+      color: #fff;
+    }
+
+    /* FULL CANVAS WRAPPER (1080 x 1920 ratio, auto-fits 100% viewport) */
+    .live-canvas {
+      width: 100vw;
+      height: 100vh;
+      max-width: 1080px;
+      max-height: 1920px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: 24% 34% 42%; /* Golden ratio layout for 9:16 */
+      background: #060913;
+    }
+
+    /* ========================================================
+       BACKGROUND: CLEAN CYBERPUNK STAGE (NO AI TEXT)
+       ======================================================== */
+    .bg-stage-layer {
+      position: absolute;
+      inset: 0;
+      background-image: url('clean_cyber_bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 1;
+    }
+
+    /* Animated Ambient Glow Sweep */
+    .ambient-pulse {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 18%, rgba(0, 240, 255, 0.18) 0%, transparent 55%),
+                  radial-gradient(circle at 50% 82%, rgba(157, 0, 255, 0.18) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 2;
+      animation: ambientGlow 4s infinite ease-in-out alternate;
+    }
+
+    /* Floating Dust Particles */
+    #particleCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* ========================================================
+       1. TOP SECTION: CLEAN STREAMER IDENTITY (Y: 0 - 24%)
+       ======================================================== */
+    .top-section {
+      position: relative;
+      z-index: 10;
+      padding: 35px 30px 10px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Minimal Top Safe Meta Pill */
+    .top-meta-row {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(6, 10, 20, 0.75);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 30px;
+      padding: 8px 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    .live-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-hud);
+      font-size: 13px;
+      font-weight: 800;
+      color: #ff0055;
+      letter-spacing: 1.5px;
+    }
+
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      background: #ff0055;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055;
+      animation: blinkDot 1s infinite alternate;
+    }
+
+    .clock-display {
+      font-family: var(--font-hud);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: 2px;
+    }
+
+    .fps-tag {
+      font-family: var(--font-sub);
+      font-size: 15px;
+      font-weight: 800;
+      color: #00ffaa;
+      letter-spacing: 1px;
+    }
+
+    /* MAIN STREAMER EMBLEM (CLEAN & GORGEOUS) */
+    .streamer-hero-banner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      margin-top: 10px;
+    }
+
+    .neon-streamer-name {
+      font-family: var(--font-hud);
+      font-size: 52px;
+      font-weight: 900;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 
+        0 0 10px #00f0ff,
+        0 0 25px #00f0ff,
+        0 0 50px #9d00ff,
+        0 0 90px #9d00ff;
+      animation: neonPulse 3s infinite alternate;
+      line-height: 1.1;
+    }
+
+    .sub-brand-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .rank-pill {
+      font-family: var(--font-hud);
+      font-size: 13px;
+      font-weight: 800;
+      color: #ffd700;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 120, 0, 0.2));
+      border: 1px solid #ffd700;
+      padding: 4px 16px;
+      border-radius: 20px;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+      letter-spacing: 1px;
+    }
+
+    .tiktok-id-pill {
+      font-family: var(--font-hud);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--cyan);
+      background: rgba(0, 240, 255, 0.15);
+      border: 1px solid var(--cyan);
+      padding: 4px 16px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+    }
+
+    /* ========================================================
+       2. MIDDLE SECTION: 16:9 GAME HUD FRAME (Y: 24% - 58%)
+       100% TRANSPARENT IN OBS SO GAME SHOWS PERFECTLY!
+       ======================================================== */
+    .game-section {
+      position: relative;
+      z-index: 10;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .game-viewport-frame {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      border: 3px solid var(--cyan);
+      border-radius: 8px;
+      box-shadow: var(--glow-cyan), inset 0 0 20px rgba(0, 240, 255, 0.2);
+      background: transparent; /* TRANSPARENT SO YOUR GAME UNDERNEATH SHOWS THROUGH */
+      overflow: hidden;
+    }
+
+    /* Sci-Fi Brackets on 4 Corners */
+    .hud-bracket {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      border-color: #ffffff;
+      border-style: solid;
+      z-index: 15;
+      pointer-events: none;
+    }
+    .hb-tl { top: -4px; left: -4px; border-width: 5px 0 0 5px; }
+    .hb-tr { top: -4px; right: -4px; border-width: 5px 5px 0 0; }
+    .hb-bl { bottom: -4px; left: -4px; border-width: 0 0 5px 5px; }
+    .hb-br { bottom: -4px; right: -4px; border-width: 0 5px 5px 0; }
+
+    /* Animated Soundwave on Bottom Rim of Game */
+    .game-equalizer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 16px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      padding: 0 20px;
+      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.75));
+      z-index: 12;
+      pointer-events: none;
+    }
+
+    .eq-stick {
+      width: 6px;
+      background: var(--cyan);
+      border-radius: 3px 3px 0 0;
+      box-shadow: 0 0 8px var(--cyan);
+      animation: eqJump 0.7s infinite alternate ease-in-out;
+    }
+    .eq-stick:nth-child(2n) { animation-duration: 0.4s; }
+    .eq-stick:nth-child(3n) { animation-duration: 0.9s; background: var(--purple); box-shadow: 0 0 8px var(--purple); }
+    .eq-stick:nth-child(4n) { animation-duration: 0.6s; }
+    .eq-stick:nth-child(5n) { animation-duration: 1.1s; background: #00ffaa; box-shadow: 0 0 8px #00ffaa; }
+
+    /* ========================================================
+       3. BOTTOM SECTION: MOVING TEXT, STATS & SAWERIA QR (42%)
+       ======================================================== */
+    .bottom-section {
+      position: relative;
+      z-index: 10;
+      padding: 12px 20px 30px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* SMOOTH RUNNING TEXT / MARQUEE TICKER */
+    .ticker-container {
+      width: 100%;
+      background: rgba(10, 14, 25, 0.92);
+      border: 1px solid rgba(0, 240, 255, 0.5);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    }
+
+    .ticker-badge {
+      background: linear-gradient(135deg, var(--purple), var(--cyan));
+      color: #fff;
+      font-family: var(--font-hud);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 10px 16px;
+      white-space: nowrap;
+    }
+
+    .ticker-scroll-track {
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 8px 0;
+    }
+
+    .ticker-live-text {
+      display: inline-block;
+      font-family: var(--font-sub);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #ffffff;
+      padding-left: 100%;
+      animation: infiniteMarquee 18s linear infinite;
+    }
+
+    .highlight-gold { color: #ffd700; }
+    .highlight-cyan { color: #00f0ff; }
+    .highlight-pink { color: #ff007f; }
+
+    /* LOWER CONTENT: STATS & NEON SAWERIA CARD */
+    .lower-content-grid {
+      display: grid;
+      grid-template-columns: 1fr 240px;
+      gap: 16px;
+      align-items: stretch;
+      flex: 1;
+    }
+
+    /* Left: Stats & TikTok Chat Container */
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .stat-chip {
+      background: rgba(10, 14, 25, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-left: 4px solid var(--cyan);
+      border-radius: 8px;
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stat-title {
+      font-family: var(--font-hud);
+      font-size: 10px;
+      color: #8b9bb4;
+      letter-spacing: 1px;
+    }
+
+    .stat-val {
+      font-family: var(--font-sub);
+      font-size: 17px;
+      font-weight: 800;
+    }
+    .stat-val.fire { color: #ff0055; font-family: var(--font-hud); font-size: 14px; }
+    .stat-val.social { color: var(--cyan); }
+
+    /* Glass Chat Container Frame */
+    .chat-glass-frame {
+      flex: 1;
+      background: rgba(8, 12, 22, 0.72);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(10px);
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-hud);
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--cyan);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 6px;
+    }
+
+    .chat-dot {
+      width: 8px;
+      height: 8px;
+      background: #00ff88;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #00ff88;
+    }
+
+    .chat-stream-box {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 8px 0;
+      overflow: hidden;
+    }
+
+    .chat-msg {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+    .chat-msg strong { color: #cedaff; }
+    .chat-msg span { color: #fff; }
+
+    /* Right: NEON SAWERIA QR CARD WITH SCANLINE */
+    .saweria-neon-card {
+      background: rgba(10, 14, 25, 0.92);
+      border: 2px solid var(--cyan);
+      border-radius: 12px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      box-shadow: var(--glow-cyan);
+    }
+
+    .qr-card-title {
+      font-family: var(--font-hud);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--cyan);
+      text-align: center;
+    }
+
+    .qr-holder {
+      width: 175px;
+      height: 175px;
+      position: relative;
+      background: #fff;
+      border-radius: 8px;
+      padding: 6px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+    }
+
+    .qr-holder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Laser scanline moving up & down */
+    .laser-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #00f0ff, #fff, #00f0ff, transparent);
+      box-shadow: 0 0 12px #00f0ff;
+      animation: laserMove 2.2s infinite alternate ease-in-out;
+    }
+
+    .qr-link-sub {
+      font-family: var(--font-sub);
+      font-size: 14px;
+      font-weight: 800;
+      color: #ffd700;
+      text-align: center;
+    }
+
+    /* ========================================================
+       KEYFRAME ANIMATIONS
+       ======================================================== */
+    @keyframes infiniteMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    @keyframes laserMove {
+      0% { top: 4px; }
+      100% { top: 165px; }
+    }
+
+    @keyframes blinkDot {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0.3; transform: scale(0.8); }
+    }
+
+    @keyframes neonPulse {
+      0% {
+        text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 40px #9d00ff;
+      }
+      100% {
+        text-shadow: 0 0 15px #00f0ff, 0 0 35px #00f0ff, 0 0 70px #9d00ff, 0 0 100px #9d00ff;
+      }
+    }
+
+    @keyframes eqJump {
+      0% { height: 3px; }
+      100% { height: 15px; }
+    }
+
+    @keyframes ambientGlow {
+      0% { opacity: 0.7; }
+      100% { opacity: 1.2; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="live-canvas">
+    
+    <!-- 1. CLEAN CYBER ARENA BACKGROUND (NO TEXT) -->
+    <div class="bg-stage-layer"></div>
+    <div class="ambient-pulse"></div>
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- ============================================== -->
+    <!-- 1. TOP SECTION: STREAMER IDENTITY (CLEAN)      -->
+    <!-- ============================================== -->
+    <header class="top-section">
+      <!-- Status Meta Bar -->
+      <div class="top-meta-row">
+        <div class="live-badge">
+          <span class="live-dot"></span>
+          <span>LIVE BROADCAST</span>
+        </div>
+        <div class="clock-display" id="clockEl">15:10:00</div>
+        <div class="fps-tag">1080P • 60 FPS</div>
+      </div>
+
+      <!-- Single Glowing Streamer Emblem -->
+      <div class="streamer-hero-banner">
+        <h1 class="neon-streamer-name">RRANGGAZ_</h1>
+        <div class="sub-brand-row">
+          <span class="rank-pill">⭐ MYTHIC IMMORTAL</span>
+          <span class="tiktok-id-pill">@rranggaz_</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============================================== -->
+    <!-- 2. MIDDLE SECTION: 16:9 GAME HUD FRAME         -->
+    <!-- ============================================== -->
+    <section class="game-section">
+      <div class="game-viewport-frame">
+        <div class="hud-bracket hb-tl"></div>
+        <div class="hud-bracket hb-tr"></div>
+        <div class="hud-bracket hb-bl"></div>
+        <div class="hud-bracket hb-br"></div>
+
+        <!-- Equalizer Soundwave on bottom edge -->
+        <div class="game-equalizer">
+          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
+          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
+          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
+          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
+          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
+          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
+          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
+          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 3. BOTTOM SECTION: MOVING TEXT & SAWERIA QR    -->
+    <!-- ============================================== -->
+    <footer class="bottom-section">
+      <!-- SMOOTH RUNNING TICKER (TEKS BERGERAK) -->
+      <div class="ticker-container">
+        <div class="ticker-badge">INFO STREAM</div>
+        <div class="ticker-scroll-track">
+          <div class="ticker-live-text">
+            🔥 WELCOME TO LIVE STREAM <span class="highlight-cyan">@rranggaz_</span>!  •  
+            <span class="highlight-gold">TAP-TAP LAYAR & SHARE YA GUYS!</span>  •  
+            SUPPORT SAWERIA: <span class="highlight-cyan">saweria.co/rranggaz_</span>  •  
+            MABAR? SPAM NICK & ID DI CHAT!  •  
+            <span class="highlight-pink">TARGET HARI INI: PUSH MYTHIC GLORY 🔥</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOWER GRID: STATS + NEON SAWERIA CARD -->
+      <div class="lower-content-grid">
+        <div class="left-column">
+          <!-- Stats Chips -->
+          <div class="stats-row">
+            <div class="stat-chip">
+              <span class="stat-title">WIN STREAK</span>
+              <span class="stat-val fire">🔥 9 WINS</span>
+            </div>
+            <div class="stat-chip">
+              <span class="stat-title">TIKTOK OFFICIAL</span>
+              <span class="stat-val social">@rranggaz_</span>
+            </div>
+          </div>
+
+          <!-- Glass Chat Box Container -->
+          <div class="chat-glass-frame">
+            <div class="chat-header">
+              <span class="chat-dot"></span>
+              <span>LIVE CHAT STREAM</span>
+            </div>
+            <div class="chat-stream-box" id="chatStreamBox">
+              <div class="chat-msg">
+                <strong>SystemBot:</strong> <span>Selamat datang di live @rranggaz_! Jangan lupa tap-tap layar ya guys!</span>
+              </div>
+              <div class="chat-msg">
+                <strong>BangJago:</strong> <span>Alucardnya GG banget bang! Auto win ini mah 🔥</span>
+              </div>
+              <div class="chat-msg">
+                <strong>Sultan_ML:</strong> <span class="highlight-gold">🎁 Mengirimkan Mawar x100! Semangat bang!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Integrated Neon Saweria Card -->
+        <div class="saweria-neon-card">
+          <div class="qr-card-title">SCAN TO SUPPORT</div>
+          <div class="qr-holder">
+            <div class="laser-line"></div>
+            <img src="sample_qr.png" alt="Saweria QRIS">
+          </div>
+          <div class="qr-link-sub">saweria.co/rranggaz_</div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Live Digital Clock
+    const clockEl = document.getElementById('clockEl');
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      clockEl.textContent = `${h}:${m}:${s}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Floating Cyber Stardust Particles
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() {
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const particles = [];
+    for (let i = 0; i < 35; i++) {
+      particles.push({
+        x: Math.random() * 1080,
+        y: Math.random() * 1920,
+        r: Math.random() * 2 + 1,
+        color: Math.random() > 0.5 ? 'rgba(0, 240, 255, ' : 'rgba(157, 0, 255, ',
+        sy: -(Math.random() * 0.8 + 0.3),
+        sx: (Math.random() - 0.5) * 0.4,
+        a: Math.random() * 0.6 + 0.2
+      });
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        p.y += p.sy;
+        p.x += p.sx;
+        if (p.y < 0) {
+          p.y = canvas.height;
+          p.x = Math.random() * canvas.width;
+        }
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color + p.a + ')';
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = p.color + '1)';
+        ctx.fill();
+      }
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+
+    // Simulated Auto-Chat Stream
+    const chatBox = document.getElementById('chatStreamBox');
+    const sampleChats = [
+      { user: 'BocilMabar', text: 'Keren banget gameplay-nya bang! 🔥' },
+      { user: 'Siti_ML', text: 'Udah tap-tap 1000 likes bang!' },
+      { user: 'Rizky_Pro', text: 'Izin tiru combo dan build-nya bang @rranggaz_ 😎' },
+      { user: 'DepokPride', text: 'Auto Mythic Glory hari ini mah!' }
+    ];
+
+    setInterval(() => {
+      const c = sampleChats[Math.floor(Math.random() * sampleChats.length)];
+      const div = document.createElement('div');
+      div.className = 'chat-msg';
+      div.innerHTML = `<strong>${c.user}:</strong> <span>${c.text}</span>`;
+      chatBox.appendChild(div);
+      if (chatBox.children.length > 4) {
+        chatBox.removeChild(chatBox.children[0]);
+      }
+    }, 6000);
+  </script>
+</body>
+</html>
