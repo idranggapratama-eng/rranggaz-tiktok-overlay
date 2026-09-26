@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1080, height=1920, initial-scale=1.0">
-  <title>RANZ GAMING - Mobile Legends TikTok Live Overlay</title>
+  <title>RANZ GAMING - Mobile Legends: Magic Chess TikTok Live Overlay</title>
   
   <!-- Modern Esports & Clean Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
 </head>
 <body>
 
-  <!-- ROOT 1080 x 1920 OVERLAY CONTAINER -->
+  <!-- ROOT 1080 x 1920 OVERLAY CONTAINER (VERTICAL 9:16) -->
   <main class="overlay-viewport" id="overlayViewport">
     
     <!-- 1. CINEMATIC BACKGROUND ART & ENERGY -->
@@ -28,41 +28,32 @@
     <!-- 3. MOBILE LEGENDS HERO ARTWORK LAYER (DECOUPLED) -->
     <div id="heroComponentContainer"></div>
 
-    <!-- 4. A. HEADER SECTION -->
+    <!-- 4. HEADER SECTION (NATURAL & CLEAN - MLBB LOGO + BRAND + MOVING COMMANDER HERO) -->
     <div id="headerComponentContainer"></div>
 
-    <!-- 5. B. GAMEPLAY AREA (16:9 - 1008x567) -->
+    <!-- 5. GAMEPLAY AREA (16:9 - 1008x567 TRANSPARENT OBS CUTOUT) -->
     <div id="gameplayComponentContainer"></div>
 
     <!-- 6. RUNNING MARQUEE TICKER (BELOW GAME) -->
     <div id="tickerComponentContainer"></div>
 
-    <!-- 7. D. WEBCAM & E. LIVE CHAT SPLIT ROW -->
-    <div class="cam-chat-row">
-      <div id="webcamComponentContainer"></div>
-      <div id="chatComponentContainer"></div>
-    </div>
-
-    <!-- 8. F. STREAM INFO CARDS (FOLLOWER, SUB, DONATION, TOP DONOR, SAWERIA) -->
-    <div id="infoCardsComponentContainer"></div>
+    <!-- 7. BOTTOM SECTION (WEBCAM + SAWERIA QR + SOCIAL RIBBON - ZERO DUMMY DATA) -->
+    <div id="bottomSectionContainer"></div>
 
   </main>
 
-  <!-- 9. SETTINGS & TESTING DRAWER (TOGGLE VIA 'S' OR GEAR ICON) -->
+  <!-- 8. SETTINGS & TESTING DRAWER (TOGGLE VIA 'S' OR GEAR ICON) -->
   <div id="settingsComponentContainer"></div>
 
   <!-- APPLICATION ENTRYPOINT (ES MODULES) -->
   <script type="module">
     import { streamConfig } from './config/streamConfig.js';
-    import { liveDataAdapter } from './adapters/liveDataAdapter.js';
     import { AnimationManager } from './animations/animationManager.js';
     import { HeaderComponent } from './components/header.js';
     import { HeroLayerComponent } from './components/heroLayer.js';
     import { GameplayFrameComponent } from './components/gameplayFrame.js';
     import { TickerBarComponent } from './components/tickerBar.js';
-    import { WebcamFrameComponent } from './components/webcamFrame.js';
-    import { ChatPanelComponent } from './components/chatPanel.js';
-    import { InfoCardsComponent } from './components/infoCards.js';
+    import { BottomSectionComponent } from './components/bottomSection.js';
     import { SettingsPanelComponent } from './components/settingsPanel.js';
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -84,10 +75,12 @@
 
       // 2. Initialize Particle Animation Manager
       const canvasEl = document.getElementById('particleCanvas');
-      const animManager = new AnimationManager(canvasEl, {
-        particleCount: streamConfig.animations.particleCount
-      });
-      animManager.start();
+      if (canvasEl) {
+        const animManager = new AnimationManager(canvasEl, {
+          particleCount: streamConfig.animations.particleCount
+        });
+        animManager.start();
+      }
 
       // 3. Mount UI Components
       const headerComp = new HeaderComponent(document.getElementById('headerComponentContainer'));
@@ -102,21 +95,15 @@
       const tickerComp = new TickerBarComponent(document.getElementById('tickerComponentContainer'));
       tickerComp.render();
 
-      const webcamComp = new WebcamFrameComponent(document.getElementById('webcamComponentContainer'));
-      webcamComp.render();
-
-      const chatComp = new ChatPanelComponent(document.getElementById('chatComponentContainer'));
-      chatComp.render();
-
-      const infoCardsComp = new InfoCardsComponent(document.getElementById('infoCardsComponentContainer'));
-      infoCardsComp.render();
+      const bottomSectionComp = new BottomSectionComponent(document.getElementById('bottomSectionContainer'));
+      bottomSectionComp.render();
 
       const settingsComp = new SettingsPanelComponent(document.getElementById('settingsComponentContainer'), {
         onUpdate: () => {}
       });
       settingsComp.render();
 
-      console.log('RANZ GAMING Mobile Legends Overlay initialized successfully!');
+      console.log('RANZ GAMING Mobile Legends Magic Chess Overlay initialized successfully!');
 
       // Auto-scale to ensure 100% perfect fit on any TikTok Live Studio viewport (9:16 portrait)
       function autoFitVertical() {
@@ -128,8 +115,8 @@
           const scaleW = w / 1080;
           const scaleH = h / 1920;
           const finalScale = Math.min(scaleW, scaleH);
-          if (Math.abs(finalScale - 1) > 0.01) {
-            viewport.style.transform = scale();
+          if (Math.abs(finalScale - 1) > 0.005) {
+            viewport.style.transform = `scale(${finalScale})`;
             viewport.style.transformOrigin = 'top center';
           } else {
             viewport.style.transform = 'none';
@@ -138,7 +125,6 @@
       }
       window.addEventListener('resize', autoFitVertical);
       autoFitVertical();
-
     });
   </script>
 </body>

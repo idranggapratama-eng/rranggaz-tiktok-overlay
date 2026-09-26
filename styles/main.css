@@ -1,13 +1,15 @@
 /* ========================================================
    RANZ GAMING - ESPORTS STREAMING OVERLAY CSS
-   Theme: Dark Black (#05070B) + Electric Blue + Gold + Clean White
-   Target: 1080 x 1920 (9:16 Vertical)
+   Theme: Mobile Legends: Magic Chess (Cosmic Esports Edition)
+   Colors: Dark Black (#05070B) + Electric Cyan (#00e5ff) + Mythic Gold (#ffd700)
+   Target: 1080 x 1920 (9:16 Vertical Portrait for TikTok Live Studio)
+   Zero Dummy Data • Pure Authentic Esports Streamer Setup
    ======================================================== */
 
 :root {
   --bg-primary: #05070B;
-  --bg-surface: rgba(10, 15, 24, 0.72);
-  --bg-surface-elevated: rgba(14, 21, 35, 0.85);
+  --bg-surface: rgba(10, 15, 24, 0.75);
+  --bg-surface-elevated: rgba(14, 21, 35, 0.88);
   
   --electric-blue: #00e5ff;
   --electric-blue-deep: #0099ff;
@@ -15,14 +17,14 @@
   
   --premium-gold: #ffd700;
   --premium-gold-dark: #b8860b;
-  --premium-gold-glow: rgba(255, 215, 0, 0.4);
+  --premium-gold-glow: rgba(255, 215, 0, 0.45);
   
-  --live-red: #ff0055;
   --text-white: #ffffff;
   --text-muted: #8e9bb0;
   
   --border-metallic: 1px solid rgba(255, 255, 255, 0.12);
   --border-gold-accent: 1px solid rgba(255, 215, 0, 0.35);
+  --border-cyan-accent: 1px solid rgba(0, 229, 255, 0.35);
   --shadow-esports: 0 12px 35px rgba(0, 0, 0, 0.7);
 
   --font-brand: 'Orbitron', -apple-system, sans-serif;
@@ -74,8 +76,9 @@ body.mode-transparent .bg-energy-gradients {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 36px 36px 36px 36px;
+  justify-content: flex-start;
+  padding: 28px 36px;
+  gap: 16px;
 }
 
 /* ========================================================
@@ -89,15 +92,15 @@ body.mode-transparent .bg-energy-gradients {
   background-position: center;
   z-index: 1;
   opacity: 0.65;
-  filter: saturate(1.1) brightness(0.7);
+  filter: saturate(1.1) brightness(0.65);
 }
 
 .bg-energy-gradients {
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(circle at 50% 10%, rgba(0, 229, 255, 0.16) 0%, transparent 55%),
-    radial-gradient(circle at 85% 65%, rgba(255, 215, 0, 0.14) 0%, transparent 50%),
+    radial-gradient(circle at 50% 8%, rgba(0, 229, 255, 0.18) 0%, transparent 55%),
+    radial-gradient(circle at 85% 60%, rgba(255, 215, 0, 0.12) 0%, transparent 50%),
     radial-gradient(circle at 15% 85%, rgba(0, 229, 255, 0.15) 0%, transparent 60%);
   z-index: 2;
   pointer-events: none;
@@ -123,12 +126,11 @@ body.mode-transparent .bg-energy-gradients {
 }
 
 /* ========================================================
-   MOBILE LEGENDS HERO ARTWORK LAYER (ANIMATED)
-   Decoupled layer floating behind gameplay and above background
+   MOBILE LEGENDS HERO ARTWORK LAYER (ANIMATED BACKGROUND)
    ======================================================== */
 .hero-artwork-layer {
   position: absolute;
-  right: -50px;
+  right: -60px;
   top: 360px;
   width: 720px;
   height: 960px;
@@ -150,7 +152,6 @@ body.mode-transparent .bg-energy-gradients {
   display: block;
 }
 
-/* Hero Energy Aura Behind */
 .hero-aura-glow {
   position: absolute;
   width: 500px;
@@ -163,146 +164,185 @@ body.mode-transparent .bg-energy-gradients {
 }
 
 /* ========================================================
-   A. HEADER SECTION (Y: 0 - 240px)
+   1. HEADER SECTION (CLEAN & NATURAL - MAGIC CHESS)
+   MLBB Logo + RANZ GAMING + Moving Hero Commander Icon
    ======================================================== */
-.header-container {
+.header-container.clean-natural {
   position: relative;
   z-index: 10;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.header-top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: 1008px;
   background: var(--bg-surface-elevated);
   border: var(--border-metallic);
   border-bottom: 2px solid var(--electric-blue);
-  border-radius: 40px;
-  padding: 10px 24px;
-  backdrop-filter: blur(16px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
-
-.status-live-badge {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-brand);
-  font-size: 13px;
-  font-weight: 800;
-  color: var(--live-red);
-  letter-spacing: 2px;
-}
-
-.live-pulse-dot {
-  width: 10px;
-  height: 10px;
-  background: var(--live-red);
-  border-radius: 50%;
-  box-shadow: 0 0 12px var(--live-red);
-  animation: liveBlink 1s infinite alternate;
-}
-
-.header-clock {
-  font-family: var(--font-brand);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--electric-blue);
-  letter-spacing: 2px;
-}
-
-.viewer-counter-badge {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-white);
-  background: rgba(255, 255, 255, 0.06);
-  padding: 4px 14px;
   border-radius: 20px;
+  padding: 16px 24px;
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow-esports), 0 0 25px rgba(0, 229, 255, 0.15);
 }
 
-.viewer-counter-badge .eye-icon {
-  color: var(--electric-blue);
-}
-
-.viewer-counter-badge #viewerCountNum {
-  font-family: var(--font-brand);
-  font-weight: 800;
-  color: var(--premium-gold);
-}
-
-/* Header Brand Title */
-.header-branding {
+.header-branding-row {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-end;
-  padding: 0 10px;
+  width: 100%;
 }
 
-.brand-left {
+/* Left: MLBB Official Gold Crest Logo */
+.mlbb-logo-container {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.65));
+  animation: logoFloat 3.8s ease-in-out infinite alternate;
+  flex-shrink: 0;
+}
+
+.mlbb-gold-crest {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Center: Streamer Title Group */
+.streamer-title-group {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 4px;
+  flex: 1;
+  padding: 0 20px;
 }
 
 .brand-streamer-name {
   font-family: var(--font-brand);
-  font-size: 52px;
+  font-size: 46px;
   font-weight: 900;
-  letter-spacing: 4px;
+  letter-spacing: 5px;
   line-height: 1;
-  color: #fff;
-  text-shadow: 0 0 20px var(--electric-blue-glow), 0 0 40px var(--electric-blue-glow);
+  color: #ffffff;
+  text-shadow: 0 0 20px var(--electric-blue-glow), 0 0 35px rgba(0, 229, 255, 0.6);
 }
 
 .brand-game-title {
   font-family: var(--font-sub);
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   color: var(--premium-gold);
-  text-transform: uppercase;
-}
-
-.brand-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
-}
-
-.tiktok-handle-pill {
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0, 229, 255, 0.12);
-  border: 1px solid var(--electric-blue);
-  border-radius: 25px;
-  padding: 6px 16px;
-  font-family: var(--font-brand);
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--electric-blue);
-  box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
-  letter-spacing: 1px;
+  margin-top: 2px;
 }
 
-.tagline-text {
-  font-family: var(--font-sub);
-  font-size: 13px;
+.game-sword-icon {
+  font-size: 16px;
+}
+
+.streamer-badge-pills {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.badge-pill {
+  font-family: var(--font-brand);
+  font-size: 11px;
   font-weight: 800;
-  letter-spacing: 2px;
-  color: var(--text-muted);
+  letter-spacing: 1.5px;
+  border-radius: 20px;
+  padding: 4px 14px;
+}
+
+.badge-pill.gold-rank {
+  background: rgba(255, 215, 0, 0.12);
+  border: 1px solid var(--premium-gold);
+  color: var(--premium-gold);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.badge-pill.tiktok-tag {
+  background: rgba(0, 229, 255, 0.12);
+  border: 1px solid var(--electric-blue);
+  color: var(--electric-blue);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+/* Right: Animated Magic Chess Commander Hero Badge */
+.commander-hero-badge {
+  flex-shrink: 0;
+}
+
+.commander-portal-ring {
+  width: 96px;
+  height: 96px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portal-outer-spin {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px dashed var(--electric-blue);
+  box-shadow: 0 0 16px var(--electric-blue), inset 0 0 14px var(--electric-blue);
+  animation: spinPortal 10s linear infinite;
+  pointer-events: none;
+}
+
+.portal-inner-runes {
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  border: 1.5px solid var(--premium-gold);
+  box-shadow: 0 0 10px var(--premium-gold);
+  animation: spinPortalReverse 16s linear infinite;
+  pointer-events: none;
+}
+
+.commander-img-wrap {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.4) 0%, rgba(5, 7, 11, 0.95) 80%);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.commander-chibi-img {
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  animation: commanderIdle 2.5s infinite alternate ease-in-out;
+}
+
+.portal-star-sparkle {
+  position: absolute;
+  top: -8px;
+  right: -4px;
+  color: var(--premium-gold);
+  font-size: 16px;
+  text-shadow: 0 0 10px var(--premium-gold);
+  animation: starPulse 1.2s infinite alternate;
+  z-index: 5;
 }
 
 /* ========================================================
-   B. GAMEPLAY AREA (16:9 RATIO - 1008 x 567 px)
-   Animated Light Beam Running Along Border
+   2. GAMEPLAY AREA (16:9 - 1008 x 567 px)
+   Animated Light Beam Running Border + Transparent Center
    ======================================================== */
 .gameplay-wrapper {
   position: relative;
@@ -311,35 +351,34 @@ body.mode-transparent .bg-energy-gradients {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 12px 0;
 }
 
 .gameplay-screen-frame {
   width: 1008px;
-  height: 567px; /* Exact 16:9 */
+  height: 567px; /* 16:9 standard */
   position: relative;
-  border-radius: 12px;
+  border-radius: 14px;
   background: transparent; /* TRANSPARENT FOR OBS GAME CAPTURE */
-  box-shadow: var(--shadow-esports), 0 0 30px rgba(0, 229, 255, 0.25);
+  box-shadow: var(--shadow-esports), 0 0 35px rgba(0, 229, 255, 0.25);
   overflow: hidden;
 }
 
-/* Base metallic dark frame */
+/* Base metallic gold/cyan frame */
 .gameplay-screen-frame::before {
   content: '';
   position: absolute;
   inset: 0;
-  border: 2px solid rgba(255, 215, 0, 0.4);
-  border-radius: 12px;
+  border: 2px solid rgba(255, 215, 0, 0.45);
+  border-radius: 14px;
   pointer-events: none;
   z-index: 10;
 }
 
-/* ANIMATED LIGHT BEAM (TOP -> RIGHT -> BOTTOM -> LEFT -> TOP) */
+/* ANIMATED LIGHT BEAM */
 .light-beam-track {
   position: absolute;
   inset: 0;
-  border-radius: 12px;
+  border-radius: 14px;
   pointer-events: none;
   z-index: 11;
   overflow: hidden;
@@ -350,7 +389,7 @@ body.mode-transparent .bg-energy-gradients {
   width: 160px;
   height: 4px;
   background: linear-gradient(90deg, transparent, var(--electric-blue), #ffffff, var(--electric-blue), transparent);
-  box-shadow: 0 0 15px var(--electric-blue), 0 0 30px #ffffff;
+  box-shadow: 0 0 18px var(--electric-blue), 0 0 35px #ffffff;
   border-radius: 2px;
   animation: borderLightLoop 6s linear infinite;
   will-change: transform, top, left;
@@ -359,8 +398,8 @@ body.mode-transparent .bg-energy-gradients {
 /* Corner metallic accents */
 .corner-esport {
   position: absolute;
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-color: var(--premium-gold);
   border-style: solid;
   z-index: 15;
@@ -371,18 +410,18 @@ body.mode-transparent .bg-energy-gradients {
 .ce-bl { bottom: -2px; left: -2px; border-width: 0 0 4px 4px; }
 .ce-br { bottom: -2px; right: -2px; border-width: 0 4px 4px 0; }
 
-/* Subtle Equalizer Soundwave on Bottom Rim */
+/* Audio Equalizer Visualizer on Bottom Frame */
 .game-soundwave-rim {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 16px;
+  height: 18px;
   display: flex;
   align-items: flex-end;
   justify-content: space-around;
-  padding: 0 30px;
-  background: linear-gradient(180deg, transparent, rgba(5, 7, 11, 0.85));
+  padding: 0 36px;
+  background: linear-gradient(180deg, transparent, rgba(5, 7, 11, 0.9));
   z-index: 12;
   pointer-events: none;
 }
@@ -400,22 +439,21 @@ body.mode-transparent .bg-energy-gradients {
 .wave-bar:nth-child(5n) { animation-duration: 0.9s; }
 
 /* ========================================================
-   RUNNING MARQUEE TICKER (BELOW GAME)
+   3. RUNNING MARQUEE TICKER (BELOW GAMEPLAY)
    ======================================================== */
 .ticker-ribbon {
   position: relative;
   z-index: 10;
   width: 1008px;
-  height: 52px;
+  height: 48px;
   background: var(--bg-surface-elevated);
   border: var(--border-metallic);
   border-left: 4px solid var(--premium-gold);
-  border-radius: 8px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   overflow: hidden;
   box-shadow: var(--shadow-esports);
-  margin-bottom: 12px;
 }
 
 .ticker-title-chip {
@@ -425,7 +463,7 @@ body.mode-transparent .bg-energy-gradients {
   font-size: 13px;
   font-weight: 900;
   letter-spacing: 1.5px;
-  padding: 0 20px;
+  padding: 0 18px;
   height: 100%;
   display: flex;
   align-items: center;
@@ -441,47 +479,59 @@ body.mode-transparent .bg-energy-gradients {
 .ticker-content {
   display: inline-block;
   font-family: var(--font-sub);
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 800;
   letter-spacing: 1.5px;
   color: var(--text-white);
   padding-left: 100%;
-  animation: marqueeLoop 24s linear infinite;
+  animation: marqueeLoop 22s linear infinite;
 }
 
 .ticker-content span.highlight-cyan { color: var(--electric-blue); }
 .ticker-content span.highlight-gold { color: var(--premium-gold); }
 
 /* ========================================================
-   D. WEBCAM & E. LIVE CHAT SPLIT PANEL
+   4. BOTTOM SECTION (CLEAN & NATURAL - ZERO DUMMY DATA)
+   Webcam Frame + Saweria QR + Streamer Social Ribbon
    ======================================================== */
-.cam-chat-row {
+.bottom-clean-container {
   position: relative;
   z-index: 10;
   width: 1008px;
-  display: grid;
-  grid-template-columns: 340px 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  margin-bottom: 12px;
 }
 
-/* D. WEBCAM PANEL */
-.webcam-frame-box {
-  width: 340px;
-  height: 255px; /* 4:3 camera aspect */
-  background: var(--bg-surface);
+/* TOP ROW: WEBCAM + SAWERIA QR */
+.bottom-interactive-row {
+  display: grid;
+  grid-template-columns: 530px 458px;
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* 1. WEBCAM FRAME (TRANSPARENT FOR OBS CAMERA CAPTURE) */
+.webcam-box-clean {
+  height: 380px;
+  background: var(--bg-surface-elevated);
   border: 1.5px solid var(--electric-blue);
-  border-radius: 12px;
+  border-radius: 16px;
   position: relative;
-  box-shadow: 0 0 25px rgba(0, 229, 255, 0.25);
+  box-shadow: var(--shadow-esports), 0 0 25px rgba(0, 229, 255, 0.2);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-/* Transparent cutout for camera */
-.webcam-viewport {
+.webcam-glass-frame {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.webcam-viewport-cutout {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -492,449 +542,323 @@ body.mode-transparent .bg-energy-gradients {
   justify-content: center;
 }
 
-.webcam-label-bar {
+.cam-guide-crosshair {
+  width: 40px;
+  height: 40px;
+  border: 1px dashed rgba(0, 229, 255, 0.25);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Webcam corner brackets */
+.cam-corner {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  background: rgba(5, 7, 11, 0.85);
-  border: 1px solid var(--premium-gold);
-  border-radius: 4px;
-  padding: 4px 10px;
+  width: 20px;
+  height: 20px;
+  border-color: var(--electric-blue);
+  border-style: solid;
+  z-index: 6;
+  pointer-events: none;
+}
+.cc-tl { top: 0; left: 0; border-width: 3px 0 0 3px; }
+.cc-tr { top: 0; right: 0; border-width: 3px 3px 0 0; }
+.cc-bl { bottom: 0; left: 0; border-width: 0 0 3px 3px; }
+.cc-br { bottom: 0; right: 0; border-width: 0 3px 3px 0; }
+
+.webcam-top-badge {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  background: rgba(5, 7, 11, 0.88);
+  border: 1px solid var(--electric-blue);
+  border-radius: 20px;
+  padding: 5px 14px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  font-family: var(--font-brand);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--electric-blue);
+  letter-spacing: 1px;
+  z-index: 5;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+.mic-dot {
+  width: 8px;
+  height: 8px;
+  background: #00ffaa;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00ffaa;
+  animation: liveBlink 1.4s infinite alternate;
+}
+
+.webcam-bottom-tag {
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  background: rgba(255, 215, 0, 0.12);
+  border: 1px solid var(--premium-gold);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-family: var(--font-brand);
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--premium-gold);
+  letter-spacing: 1px;
   z-index: 5;
 }
 
-.webcam-label-bar span {
+/* 2. SAWERIA QR CARD (GORGEOUS SCANNER) */
+.saweria-box-clean {
+  height: 380px;
+  background: var(--bg-surface-elevated);
+  border: 1.5px solid var(--premium-gold);
+  border-radius: 16px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-esports), 0 0 25px rgba(255, 215, 0, 0.2);
+  backdrop-filter: blur(18px);
+}
+
+.saweria-card-frame {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.saweria-header-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 215, 0, 0.12);
+  border: 1px solid var(--premium-gold);
+  border-radius: 20px;
+  padding: 5px 16px;
   font-family: var(--font-brand);
   font-size: 11px;
   font-weight: 800;
   color: var(--premium-gold);
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
 }
 
-.webcam-name-bottom {
+.heart-pulse {
+  animation: starPulse 1.2s infinite alternate;
+}
+
+.saweria-qr-viewport {
+  width: 180px;
+  height: 180px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 8px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.laser-scanner-line {
   position: absolute;
-  bottom: 8px;
-  right: 10px;
-  background: rgba(0, 229, 255, 0.15);
-  border: 1px solid var(--electric-blue);
-  border-radius: 4px;
-  padding: 3px 8px;
-  font-family: var(--font-brand);
-  font-size: 10px;
-  font-weight: 800;
-  color: var(--electric-blue);
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #ff0055, #ffd700, #ff0055, transparent);
+  box-shadow: 0 0 12px #ffd700;
+  animation: laserScan 2.4s ease-in-out infinite alternate;
   z-index: 5;
 }
 
-/* E. LIVE CHAT PANEL */
-.chat-panel-box {
-  background: var(--bg-surface-elevated);
-  border: var(--border-metallic);
-  border-radius: 12px;
-  padding: 14px 18px;
-  backdrop-filter: blur(16px);
-  box-shadow: var(--shadow-esports);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 255px;
-}
-
-.chat-header-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-bottom: 8px;
-}
-
-.chat-title-tag {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-brand);
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--electric-blue);
-  letter-spacing: 1px;
-}
-
-.chat-dot-live {
-  width: 7px;
-  height: 7px;
-  background: #00ffaa;
-  border-radius: 50%;
-  box-shadow: 0 0 8px #00ffaa;
-}
-
-.chat-subnote {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.chat-messages-scroll {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 8px;
-  padding: 10px 0;
-  overflow: hidden;
-}
-
-/* Dynamic Chat Empty State */
-.chat-empty-state {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
-  font-size: 14px;
-  font-weight: 600;
-  height: 100%;
-}
-
-/* Chat message item (animated slide/fade) */
-.chat-bubble {
-  background: rgba(255, 255, 255, 0.04);
-  border-left: 3px solid var(--electric-blue);
-  border-radius: 6px;
-  padding: 6px 10px;
-  font-size: 14px;
-  line-height: 1.35;
-  animation: chatSlideIn 0.35s ease-out;
-}
-
-.chat-bubble .user-nick {
-  font-weight: 800;
-  color: var(--premium-gold);
-  margin-right: 6px;
-}
-
-.chat-bubble .user-msg {
-  color: var(--text-white);
-}
-
-/* ========================================================
-   F. STREAM INFO PANELS (4 CARDS + SAWERIA QR)
-   NEW FOLLOWER • NEW SUBSCRIBER • DONATION • TOP DONATE
-   ======================================================== */
-.stream-info-grid {
-  position: relative;
-  z-index: 10;
-  width: 1008px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 180px;
-  gap: 12px;
-  align-items: stretch;
-}
-
-.info-card {
-  background: var(--bg-surface-elevated);
-  border: var(--border-metallic);
-  border-radius: 10px;
-  padding: 10px 14px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-  backdrop-filter: blur(14px);
-  transition: all 0.3s ease;
-}
-
-.info-card.follower { border-left: 3px solid var(--electric-blue); }
-.info-card.subscriber { border-left: 3px solid #a855f7; }
-.info-card.donation { border-left: 3px solid var(--premium-gold); }
-.info-card.top-donate { border-left: 3px solid var(--live-red); }
-
-.info-label {
-  font-family: var(--font-brand);
-  font-size: 10px;
-  font-weight: 800;
-  color: var(--text-muted);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.info-value {
-  font-family: var(--font-sub);
-  font-size: 17px;
-  font-weight: 800;
-  color: var(--text-white);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.info-value.empty {
-  color: rgba(255, 255, 255, 0.4);
-  font-weight: 600;
-  font-size: 14px;
-}
-
-/* Saweria QR Mini Card */
-.saweria-mini-card {
-  background: var(--bg-surface-elevated);
-  border: 1.5px solid var(--premium-gold);
-  border-radius: 10px;
-  padding: 6px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
-}
-
-.saweria-mini-qr {
-  width: 80px;
-  height: 80px;
-  background: #ffffff;
-  border-radius: 6px;
-  padding: 4px;
-  position: relative;
-  overflow: hidden;
-}
-
-.saweria-mini-qr img {
+.qr-code-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
 }
 
-.saweria-mini-text {
-  font-family: var(--font-sub);
-  font-size: 11px;
+.saweria-link-badge {
+  background: rgba(0, 229, 255, 0.1);
+  border: 1px solid var(--electric-blue);
+  border-radius: 8px;
+  padding: 6px 14px;
+}
+
+.saweria-url-text {
+  font-family: var(--font-brand);
+  font-size: 12px;
   font-weight: 800;
+  color: var(--electric-blue);
+  letter-spacing: 1px;
+}
+
+.saweria-sub-info {
+  font-family: var(--font-sub);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* BOTTOM BRANDING RIBBON */
+.bottom-brand-ribbon {
+  background: var(--bg-surface-elevated);
+  border: var(--border-metallic);
+  border-bottom: 2px solid var(--premium-gold);
+  border-radius: 12px;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-esports);
+}
+
+.brand-ribbon-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ribbon-brand-title {
+  font-family: var(--font-brand);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-shadow: 0 0 10px var(--electric-blue);
+}
+
+.ribbon-tagline {
+  font-family: var(--font-sub);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
   color: var(--premium-gold);
 }
 
-/* Alert Flash Animation when New Follower / Donation arrives */
-.panel-alert-active {
-  animation: alertFlash 1.2s ease-out;
+.brand-ribbon-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.brand-ribbon-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.ribbon-social-item {
+  font-family: var(--font-brand);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: var(--text-white);
+}
+
+.ribbon-social-item.highlight {
+  color: var(--premium-gold);
+  background: rgba(255, 215, 0, 0.12);
+  padding: 4px 12px;
+  border-radius: 16px;
+  border: 1px solid var(--premium-gold);
 }
 
 /* ========================================================
-   KEYFRAME ANIMATIONS (60 FPS GPU-ACCELERATED)
-   ======================================================== */
-@keyframes borderLightLoop {
-  0% {
-    top: -2px;
-    left: 0;
-    width: 160px;
-    height: 4px;
-    transform: none;
-  }
-  24% {
-    top: -2px;
-    left: calc(100% - 160px);
-    width: 160px;
-    height: 4px;
-    transform: none;
-  }
-  25% {
-    top: 0;
-    left: calc(100% - 2px);
-    width: 4px;
-    height: 160px;
-    transform: none;
-  }
-  49% {
-    top: calc(100% - 160px);
-    left: calc(100% - 2px);
-    width: 4px;
-    height: 160px;
-    transform: none;
-  }
-  50% {
-    top: calc(100% - 2px);
-    left: calc(100% - 160px);
-    width: 160px;
-    height: 4px;
-    transform: none;
-  }
-  74% {
-    top: calc(100% - 2px);
-    left: 0;
-    width: 160px;
-    height: 4px;
-    transform: none;
-  }
-  75% {
-    top: calc(100% - 160px);
-    left: -2px;
-    width: 4px;
-    height: 160px;
-    transform: none;
-  }
-  99% {
-    top: 0;
-    left: -2px;
-    width: 4px;
-    height: 160px;
-    transform: none;
-  }
-  100% {
-    top: -2px;
-    left: 0;
-    width: 160px;
-    height: 4px;
-    transform: none;
-  }
-}
-
-@keyframes heroFloating {
-  0% {
-    transform: translateY(0px) scale(1);
-  }
-  100% {
-    transform: translateY(-24px) scale(1.025);
-  }
-}
-
-@keyframes auraBreath {
-  0% { transform: scale(0.9); opacity: 0.5; }
-  100% { transform: scale(1.15); opacity: 0.85; }
-}
-
-@keyframes liveBlink {
-  from { opacity: 1; transform: scale(1); }
-  to { opacity: 0.3; transform: scale(0.85); }
-}
-
-@keyframes wavePulse {
-  0% { height: 3px; }
-  100% { height: 14px; }
-}
-
-@keyframes marqueeLoop {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-
-@keyframes chatSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes alertFlash {
-  0%, 100% {
-    box-shadow: none;
-  }
-  25%, 75% {
-    box-shadow: 0 0 25px var(--premium-gold), inset 0 0 15px var(--premium-gold);
-    border-color: var(--premium-gold);
-  }
-}
-
-@keyframes energyPulse {
-  0% { opacity: 0.6; }
-  100% { opacity: 1.1; }
-}
-
-/* ========================================================
-   SETTINGS DRAWER (TOGGLED VIA 'S' KEY OR BUTTON)
+   SETTINGS DRAWER & TESTING TOOLS
    ======================================================== */
 .settings-drawer {
   position: fixed;
   top: 0;
-  right: -420px;
-  width: 420px;
-  height: 100%;
-  background: #0b0f19;
-  border-left: 2px solid var(--electric-blue);
-  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
-  z-index: 9999;
-  transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  right: -360px;
+  width: 340px;
+  height: 100vh;
+  background: rgba(8, 12, 20, 0.96);
+  border-left: 1px solid var(--electric-blue);
+  backdrop-filter: blur(20px);
+  z-index: 1000;
+  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.8);
   display: flex;
   flex-direction: column;
-  padding: 24px;
-  overflow-y: auto;
-  font-family: var(--font-main);
 }
 
 .settings-drawer.open {
   right: 0;
 }
 
-.drawer-header {
+.settings-header {
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 16px;
-  margin-bottom: 20px;
 }
 
-.drawer-title {
+.settings-title {
   font-family: var(--font-brand);
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 900;
   color: var(--electric-blue);
+  letter-spacing: 1.5px;
 }
 
-.close-drawer-btn {
+.settings-close-btn {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 6px;
+  border: none;
+  color: var(--text-muted);
+  font-size: 24px;
   cursor: pointer;
+  line-height: 1;
+}
+
+.settings-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .settings-group {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.settings-group label {
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-muted);
-  margin-bottom: 6px;
+.settings-group-label {
+  font-family: var(--font-brand);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--premium-gold);
+  letter-spacing: 1.5px;
   text-transform: uppercase;
 }
 
-.settings-group input[type="text"],
-.settings-group select {
-  width: 100%;
-  background: #05070b;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 6px;
-  padding: 8px 12px;
-  color: #fff;
-  font-size: 14px;
-}
-
-.settings-group input[type="checkbox"] {
-  accent-color: var(--electric-blue);
-  width: 16px;
-  height: 16px;
-}
-
-.checkbox-label {
+.settings-row {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px;
   font-size: 13px;
-  margin-bottom: 8px;
-  cursor: pointer;
+  color: var(--text-white);
 }
 
-.btn-test {
-  background: linear-gradient(135deg, var(--electric-blue), var(--electric-blue-deep));
-  color: #05070b;
-  border: none;
-  padding: 10px;
+.btn-pill-action {
+  background: rgba(0, 229, 255, 0.15);
+  border: 1px solid var(--electric-blue);
+  color: var(--electric-blue);
+  padding: 6px 12px;
   border-radius: 6px;
   font-family: var(--font-brand);
   font-size: 11px;
@@ -963,135 +887,69 @@ body.mode-transparent .bg-energy-gradients {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
-
 /* ========================================================
-   MAGIC CHESS THEME: MLBB LOGO & ANIMATED HERO COMMANDER
+   KEYFRAME ANIMATIONS (60 FPS GPU-ACCELERATED)
    ======================================================== */
-.brand-left-with-logo {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+@keyframes borderLightLoop {
+  0% {
+    top: -2px;
+    left: 0;
+    width: 160px;
+    height: 4px;
+  }
+  24% {
+    top: -2px;
+    left: calc(100% - 160px);
+    width: 160px;
+    height: 4px;
+  }
+  25% {
+    top: 0;
+    left: calc(100% - 2px);
+    width: 4px;
+    height: 160px;
+  }
+  49% {
+    top: calc(100% - 160px);
+    left: calc(100% - 2px);
+    width: 4px;
+    height: 160px;
+  }
+  50% {
+    top: calc(100% - 2px);
+    left: calc(100% - 160px);
+    width: 160px;
+    height: 4px;
+  }
+  74% {
+    top: calc(100% - 2px);
+    left: 0;
+    width: 160px;
+    height: 4px;
+  }
+  75% {
+    top: calc(100% - 160px);
+    left: -2px;
+    width: 4px;
+    height: 160px;
+  }
+  99% {
+    top: 0;
+    left: -2px;
+    width: 4px;
+    height: 160px;
+  }
+  100% {
+    top: -2px;
+    left: 0;
+    width: 160px;
+    height: 4px;
+  }
 }
 
-.mlbb-logo-wrapper {
-  width: 90px;
-  height: 90px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
-  animation: logoFloat 4s infinite alternate ease-in-out;
-}
-
-.mlbb-gold-crest {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.brand-text-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.commander-tag-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 215, 0, 0.12);
-  border: 1px solid var(--premium-gold);
-  border-radius: 20px;
-  padding: 3px 12px;
-  font-family: var(--font-brand);
-  font-size: 11px;
-  font-weight: 800;
-  color: var(--premium-gold);
-  letter-spacing: 1px;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-  margin-top: 4px;
-}
-
-.commander-rank-stars {
-  font-size: 10px;
-  letter-spacing: 1px;
-}
-
-/* RIGHT: ANIMATED COMMANDER AVATAR PORTAL */
-.brand-right-commander {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.commander-avatar-portal {
-  width: 95px;
-  height: 95px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Spinning magical portal rings */
-.portal-ring-outer {
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  border: 2px dashed var(--electric-blue);
-  box-shadow: 0 0 15px var(--electric-blue), inset 0 0 15px var(--electric-blue);
-  animation: spinPortal 12s linear infinite;
-  pointer-events: none;
-}
-
-.portal-ring-runes {
-  position: absolute;
-  inset: 2px;
-  border-radius: 50%;
-  border: 1.5px solid var(--premium-gold);
-  box-shadow: 0 0 10px var(--premium-gold);
-  animation: spinPortalReverse 18s linear infinite;
-  pointer-events: none;
-}
-
-.commander-avatar-inner {
-  width: 82px;
-  height: 82px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 229, 255, 0.35) 0%, rgba(5, 7, 11, 0.9) 80%);
-  overflow: hidden;
-  position: relative;
-  z-index: 2;
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.commander-avatar-img {
-  width: 110%;
-  height: 110%;
-  object-fit: cover;
-  animation: commanderIdle 2.5s infinite alternate ease-in-out;
-}
-
-.portal-floating-star {
-  position: absolute;
-  top: -8px;
-  right: -4px;
-  color: var(--premium-gold);
-  font-size: 16px;
-  text-shadow: 0 0 8px var(--premium-gold);
-  animation: starPulse 1.2s infinite alternate;
-  z-index: 5;
-}
-
-.commander-social-stack {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
+@keyframes marqueeLoop {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
 
 @keyframes spinPortal {
@@ -1115,6 +973,36 @@ body.mode-transparent .bg-energy-gradients {
 }
 
 @keyframes logoFloat {
-  0% { transform: translateY(0px); filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5)); }
-  100% { transform: translateY(-5px); filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.8)); }
+  0% { transform: translateY(0px); filter: drop-shadow(0 0 14px rgba(255, 215, 0, 0.5)); }
+  100% { transform: translateY(-5px); filter: drop-shadow(0 0 24px rgba(255, 215, 0, 0.85)); }
+}
+
+@keyframes laserScan {
+  0% { top: 6px; }
+  100% { top: calc(100% - 9px); }
+}
+
+@keyframes liveBlink {
+  0% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+@keyframes wavePulse {
+  0% { height: 4px; }
+  100% { height: 16px; }
+}
+
+@keyframes heroFloating {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-16px) scale(1.02); }
+}
+
+@keyframes auraBreath {
+  0% { transform: scale(0.85); opacity: 0.2; }
+  100% { transform: scale(1.15); opacity: 0.45; }
+}
+
+@keyframes energyPulse {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
 }
