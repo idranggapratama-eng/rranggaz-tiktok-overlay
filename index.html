@@ -105,7 +105,7 @@
 
       console.log('RANZ GAMING Mobile Legends Magic Chess Overlay initialized successfully!');
 
-      // Auto-scale to ensure 100% perfect fit on any TikTok Live Studio viewport (9:16 portrait)
+      // Auto-scale to ensure 100% perfect fit on any TikTok Live Studio viewport (9:16 portrait or landscape preview)
       function autoFitVertical() {
         const viewport = document.getElementById('overlayViewport');
         if (!viewport) return;
@@ -115,15 +115,12 @@
           const scaleW = w / 1080;
           const scaleH = h / 1920;
           const finalScale = Math.min(scaleW, scaleH);
-          if (Math.abs(finalScale - 1) > 0.005) {
-            viewport.style.transform = `scale(${finalScale})`;
-            viewport.style.transformOrigin = 'top center';
-          } else {
-            viewport.style.transform = 'none';
-          }
+          viewport.style.transform = `translate(-50%, -50%) scale(${finalScale})`;
+          viewport.style.transformOrigin = 'center center';
         }
       }
       window.addEventListener('resize', autoFitVertical);
+      window.addEventListener('load', autoFitVertical);
       autoFitVertical();
     });
   </script>

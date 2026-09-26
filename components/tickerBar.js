@@ -16,7 +16,7 @@ export class TickerBarComponent {
         <div class="ticker-title-chip">⚔️ MAGIC CHESS</div>
         <div class="ticker-viewport">
           <div class="ticker-content" id="tickerTextContent">
-            🔥 WELCOME TO LIVE MAGIC CHESS <span class="highlight-cyan">${streamConfig.streamerName}</span>!  •  
+            🔥 WELCOME TO MAGIC CHESS ARENA <span class="highlight-cyan">${streamConfig.streamerName}</span>!  •  
             <span class="highlight-gold">SPAM BUILD & REKOMENDASI SINERGI DI CHAT!</span>  •  
             TIKTOK: <span class="highlight-cyan">${streamConfig.tiktokUsername}</span>  •  
             TAP-TAP LAYAR & SHARE YA GUYS!  •  
