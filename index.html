@@ -3,688 +3,121 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1080, height=1920, initial-scale=1.0">
-  <title>RRANGGAZ_ Live - Minimalist Glassmorphism</title>
+  <title>RANZ GAMING - Mobile Legends TikTok Live Overlay</title>
+  
+  <!-- Modern Esports & Clean Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Orbitron:wght@700;800;900&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
   
-  <style>
-    /* ========================================================
-       RRANGGAZ_ PRO MINIMALIST GLASSMORPHISM OVERLAY (1080x1920)
-       Clean • Sleek • Luxurious • 60 FPS
-       ======================================================== */
-
-    :root {
-      --accent-cyan: #00f0ff;
-      --accent-purple: #8b5cf6;
-      --accent-pink: #ec4899;
-      --accent-gold: #f59e0b;
-      --bg-dark: #090b11;
-      --glass-bg: rgba(18, 24, 38, 0.55);
-      --glass-border: rgba(255, 255, 255, 0.12);
-      --glass-glow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-      --font-brand: 'Space Grotesk', -apple-system, sans-serif;
-      --font-body: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      user-select: none;
-    }
-
-    html, body {
-      width: 1080px;
-      height: 1920px;
-      min-width: 1080px;
-      min-height: 1920px;
-      max-width: 1080px;
-      max-height: 1920px;
-      overflow: hidden;
-      background: transparent;
-      font-family: var(--font-body);
-      color: #ffffff;
-    }
-
-    /* ROOT STAGE */
-    .pro-stage {
-      width: 1080px;
-      height: 1920px;
-      position: relative;
-      overflow: hidden;
-      background: #080a10;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 45px 36px 40px 36px;
-    }
-
-    /* ========================================================
-       BACKGROUND: LUXURIOUS DEEP DARK WITH AMBIENT LIGHT ORBS
-       ======================================================== */
-    .ambient-background {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      z-index: 1;
-      pointer-events: none;
-      background: radial-gradient(circle at 50% 50%, #0d121f 0%, #06080d 100%);
-    }
-
-    /* Soft breathing ambient light orbs (diffused luxury glow) */
-    .light-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(140px);
-      opacity: 0.28;
-      animation: floatOrb 8s infinite alternate ease-in-out;
-    }
-    .orb-1 {
-      top: -100px;
-      left: 150px;
-      width: 600px;
-      height: 500px;
-      background: #00d9ff;
-    }
-    .orb-2 {
-      top: 550px;
-      right: -150px;
-      width: 550px;
-      height: 550px;
-      background: #8b5cf6;
-      animation-delay: -3s;
-    }
-    .orb-3 {
-      bottom: -100px;
-      left: 100px;
-      width: 650px;
-      height: 550px;
-      background: #3b82f6;
-      animation-delay: -5s;
-    }
-
-    /* Subtle subtle mesh overlay */
-    .subtle-mesh {
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
-      background-size: 32px 32px;
-      opacity: 0.6;
-    }
-
-    /* ========================================================
-       1. TOP SECTION: MINIMALIST STREAMER HEADER (Y: 0 - 500px)
-       ======================================================== */
-    .top-header {
-      position: relative;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 22px;
-    }
-
-    /* Sleek Top Navigation Pill */
-    .top-meta-pill {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--glass-border);
-      border-radius: 40px;
-      padding: 10px 24px;
-      backdrop-filter: blur(20px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .live-indicator {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      color: #ff3366;
-    }
-
-    .live-dot {
-      width: 8px;
-      height: 8px;
-      background: #ff3366;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #ff3366;
-      animation: pulseDot 1.2s infinite alternate;
-    }
-
-    .divider {
-      width: 1px;
-      height: 14px;
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .clock-display {
-      font-family: var(--font-brand);
-      font-size: 15px;
-      font-weight: 700;
-      color: rgba(255, 255, 255, 0.9);
-      letter-spacing: 1px;
-    }
-
-    .quality-tag {
-      font-size: 13px;
-      font-weight: 700;
-      color: #10b981;
-      letter-spacing: 0.5px;
-    }
-
-    /* STREAMER IDENTITY (CLEAN & MODERN TYPOGRAPHY) */
-    .streamer-identity {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      margin-top: 4px;
-    }
-
-    .streamer-name {
-      font-family: var(--font-brand);
-      font-size: 64px;
-      font-weight: 800;
-      letter-spacing: 3px;
-      color: #ffffff;
-      background: linear-gradient(180deg, #ffffff 40%, #cbd5e1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      line-height: 1;
-    }
-
-    .streamer-tags-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    .tag-chip {
-      font-size: 14px;
-      font-weight: 700;
-      padding: 6px 18px;
-      border-radius: 30px;
-      backdrop-filter: blur(10px);
-    }
-
-    .tag-chip.rank {
-      background: rgba(245, 158, 11, 0.12);
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      color: #fbbf24;
-      box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
-    }
-
-    .tag-chip.social {
-      background: rgba(0, 240, 255, 0.08);
-      border: 1px solid rgba(0, 240, 255, 0.3);
-      color: #38bdf8;
-    }
-
-    /* ========================================================
-       2. MIDDLE SECTION: 16:9 GAME CONTAINER
-       ELEGANT THIN BORDER • 100% TRANSPARENT IN CENTER
-       ======================================================== */
-    .game-container-wrapper {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 10px 0;
-    }
-
-    .game-glass-frame {
-      width: 100%;
-      height: 567px; /* 16:9 aspect ratio for 1008px width */
-      position: relative;
-      border-radius: 20px;
-      border: 1.5px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 
-        0 20px 50px rgba(0, 0, 0, 0.7),
-        0 0 30px rgba(0, 240, 255, 0.15),
-        inset 0 0 20px rgba(255, 255, 255, 0.04);
-      background: transparent; /* TRANSPARENT! GAME CAPTURE SHOWS THROUGH */
-      overflow: hidden;
-    }
-
-    /* Subtle light sweep along top edge of game frame */
-    .frame-top-light {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.8), transparent);
-    }
-
-    /* Modern clean audio wave at bottom rim */
-    .minimal-soundwave {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 14px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-around;
-      padding: 0 40px;
-      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.6));
-      pointer-events: none;
-    }
-
-    .sound-bar {
-      width: 5px;
-      background: rgba(255, 255, 255, 0.4);
-      border-radius: 3px 3px 0 0;
-      animation: soundPulse 0.9s infinite alternate ease-in-out;
-    }
-    .sound-bar:nth-child(2n) { animation-duration: 0.6s; background: rgba(0, 240, 255, 0.6); }
-    .sound-bar:nth-child(3n) { animation-duration: 1.2s; background: rgba(139, 92, 246, 0.6); }
-    .sound-bar:nth-child(4n) { animation-duration: 0.7s; }
-    .sound-bar:nth-child(5n) { animation-duration: 1.0s; background: rgba(0, 240, 255, 0.7); }
-
-    /* ========================================================
-       3. SMOOTH RUNNING TICKER (FROSTED GLASS PILL)
-       ======================================================== */
-    .ticker-glass-pill {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      height: 58px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 50px;
-      backdrop-filter: blur(20px);
-      box-shadow: var(--glass-glow);
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      margin-bottom: 20px;
-    }
-
-    .ticker-icon-chip {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 40px;
-      padding: 8px 18px;
-      margin-left: 8px;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-
-    .ticker-track {
-      flex: 1;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-
-    .ticker-text {
-      display: inline-block;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: rgba(255, 255, 255, 0.95);
-      padding-left: 100%;
-      animation: smoothScroll 22s linear infinite;
-    }
-
-    .highlight-blue { color: #38bdf8; }
-    .highlight-gold { color: #fbbf24; }
-    .highlight-purple { color: #c084fc; }
-
-    /* ========================================================
-       4. BOTTOM SECTION: SAWERIA CARD & OPEN CHAT AREA
-       NO DUMMY BOTS • SPACIOUS FOR NATIVE TIKTOK LIVE CHAT
-       ======================================================== */
-    .bottom-content-grid {
-      position: relative;
-      z-index: 10;
-      display: grid;
-      grid-template-columns: 1fr 280px;
-      gap: 24px;
-      align-items: stretch;
-      height: 480px;
-    }
-
-    /* Left Card: Stats & Transparent Chat Backdrop */
-    .left-glass-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      height: 100%;
-    }
-
-    .stats-chips-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .glass-stat-card {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 14px 18px;
-      backdrop-filter: blur(20px);
-      box-shadow: var(--glass-glow);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .stat-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .stat-value {
-      font-family: var(--font-brand);
-      font-size: 20px;
-      font-weight: 700;
-      color: #ffffff;
-    }
-
-    .stat-value.fire {
-      color: #f43f5e;
-    }
-
-    /* Clean Frosted Container for Real TikTok Chat */
-    .chat-backdrop-frame {
-      flex: 1;
-      background: rgba(15, 20, 32, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
-      padding: 18px 22px;
-      backdrop-filter: blur(16px);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .chat-frame-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      color: #38bdf8;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 10px;
-    }
-
-    .live-chat-dot {
-      width: 8px;
-      height: 8px;
-      background: #10b981;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #10b981;
-    }
-
-    .chat-native-hint {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.35);
-      line-height: 1.6;
-      padding: 10px;
-    }
-
-    .bottom-friendly-badge {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
-      padding: 8px 12px;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 700;
-      color: rgba(255, 255, 255, 0.8);
-      letter-spacing: 0.5px;
-    }
-
-    /* Right Card: ELEGANT FROSTED SAWERIA QR CARD */
-    .saweria-glass-card {
-      background: var(--glass-bg);
-      border: 1.5px solid rgba(255, 255, 255, 0.15);
-      border-radius: 24px;
-      padding: 20px 16px;
-      backdrop-filter: blur(25px);
-      box-shadow: var(--glass-glow), 0 0 30px rgba(0, 240, 255, 0.1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-    }
-
-    .saweria-badge-title {
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      color: #38bdf8;
-      text-transform: uppercase;
-    }
-
-    .qr-card-viewport {
-      width: 200px;
-      height: 200px;
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 8px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    }
-
-    .qr-card-viewport img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-
-    /* Subtle elegant scan beam */
-    .clean-scan-beam {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #38bdf8, #ffffff, #38bdf8, transparent);
-      box-shadow: 0 0 8px #38bdf8;
-      animation: smoothScan 2.4s infinite alternate ease-in-out;
-    }
-
-    .saweria-url-link {
-      font-family: var(--font-brand);
-      font-size: 15px;
-      font-weight: 700;
-      color: #fbbf24;
-      letter-spacing: 0.5px;
-      text-align: center;
-    }
-
-    /* ========================================================
-       KEYFRAME ANIMATIONS
-       ======================================================== */
-    @keyframes smoothScroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
-
-    @keyframes smoothScan {
-      0% { top: 6px; }
-      100% { top: 190px; }
-    }
-
-    @keyframes pulseDot {
-      from { opacity: 1; transform: scale(1); }
-      to { opacity: 0.3; transform: scale(0.8); }
-    }
-
-    @keyframes soundPulse {
-      0% { height: 3px; }
-      100% { height: 13px; }
-    }
-
-    @keyframes floatOrb {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(30px, 40px) scale(1.08); }
-    }
-  </style>
+  <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 
-  <div class="pro-stage">
+  <!-- ROOT 1080 x 1920 OVERLAY CONTAINER -->
+  <main class="overlay-viewport" id="overlayViewport">
     
-    <!-- 1. LUXURIOUS DEEP BACKGROUND WITH DIFFUSED AMBIENT ORBS -->
-    <div class="ambient-background">
-      <div class="light-orb orb-1"></div>
-      <div class="light-orb orb-2"></div>
-      <div class="light-orb orb-3"></div>
-      <div class="subtle-mesh"></div>
+    <!-- 1. CINEMATIC BACKGROUND ART & ENERGY -->
+    <div class="stage-bg-art"></div>
+    <div class="bg-energy-gradients"></div>
+    <div class="bg-mesh"></div>
+    
+    <!-- 2. STARDUST PARTICLES CANVAS (60 FPS) -->
+    <canvas id="particleCanvas" width="1080" height="1920"></canvas>
+
+    <!-- 3. MOBILE LEGENDS HERO ARTWORK LAYER (DECOUPLED) -->
+    <div id="heroComponentContainer"></div>
+
+    <!-- 4. A. HEADER SECTION -->
+    <div id="headerComponentContainer"></div>
+
+    <!-- 5. B. GAMEPLAY AREA (16:9 - 1008x567) -->
+    <div id="gameplayComponentContainer"></div>
+
+    <!-- 6. RUNNING MARQUEE TICKER (BELOW GAME) -->
+    <div id="tickerComponentContainer"></div>
+
+    <!-- 7. D. WEBCAM & E. LIVE CHAT SPLIT ROW -->
+    <div class="cam-chat-row">
+      <div id="webcamComponentContainer"></div>
+      <div id="chatComponentContainer"></div>
     </div>
 
-    <!-- ============================================== -->
-    <!-- 1. TOP HEADER: MINIMALIST STREAMER IDENTITY    -->
-    <!-- ============================================== -->
-    <header class="top-header">
-      <!-- Minimalist Status Pill -->
-      <div class="top-meta-pill">
-        <div class="live-indicator">
-          <span class="live-dot"></span>
-          <span>LIVE</span>
-        </div>
-        <div class="divider"></div>
-        <div class="clock-display" id="clockEl">15:20:00</div>
-        <div class="divider"></div>
-        <div class="quality-tag">1080P HD</div>
-      </div>
+    <!-- 8. F. STREAM INFO CARDS (FOLLOWER, SUB, DONATION, TOP DONOR, SAWERIA) -->
+    <div id="infoCardsComponentContainer"></div>
 
-      <!-- Modern Streamer Identity -->
-      <div class="streamer-identity">
-        <h1 class="streamer-name">RRANGGAZ_</h1>
-        <div class="streamer-tags-row">
-          <span class="tag-chip rank">⭐ MYTHIC IMMORTAL</span>
-          <span class="tag-chip social">TIKTOK: @rranggaz_</span>
-        </div>
-      </div>
-    </header>
+  </main>
 
-    <!-- ============================================== -->
-    <!-- 2. MIDDLE: 16:9 GAME CONTAINER (TRANSPARENT)   -->
-    <!-- ============================================== -->
-    <div class="game-container-wrapper">
-      <div class="game-glass-frame">
-        <div class="frame-top-light"></div>
+  <!-- 9. SETTINGS & TESTING DRAWER (TOGGLE VIA 'S' OR GEAR ICON) -->
+  <div id="settingsComponentContainer"></div>
 
-        <!-- Clean Subtle Soundwave at Bottom Rim -->
-        <div class="minimal-soundwave">
-          <span class="sound-bar"></span><span class="sound-bar"></span><span class="sound-bar"></span>
-          <span class="sound-bar"></span><span class="sound-bar"></span><span class="sound-bar"></span>
-          <span class="sound-bar"></span><span class="sound-bar"></span><span class="sound-bar"></span>
-          <span class="sound-bar"></span><span class="sound-bar"></span><span class="sound-bar"></span>
-          <span class="sound-bar"></span><span class="sound-bar"></span><span class="sound-bar"></span>
-          <span class="sound-bar"></span><span class="sound-bar"></span><span class="sound-bar"></span>
-          <span class="sound-bar"></span><span class="sound-bar"></span><span class="sound-bar"></span>
-          <span class="sound-bar"></span><span class="sound-bar"></span><span class="sound-bar"></span>
-        </div>
-      </div>
-    </div>
+  <!-- APPLICATION ENTRYPOINT (ES MODULES) -->
+  <script type="module">
+    import { streamConfig } from './config/streamConfig.js';
+    import { liveDataAdapter } from './adapters/liveDataAdapter.js';
+    import { AnimationManager } from './animations/animationManager.js';
+    import { HeaderComponent } from './components/header.js';
+    import { HeroLayerComponent } from './components/heroLayer.js';
+    import { GameplayFrameComponent } from './components/gameplayFrame.js';
+    import { TickerBarComponent } from './components/tickerBar.js';
+    import { WebcamFrameComponent } from './components/webcamFrame.js';
+    import { ChatPanelComponent } from './components/chatPanel.js';
+    import { InfoCardsComponent } from './components/infoCards.js';
+    import { SettingsPanelComponent } from './components/settingsPanel.js';
 
-    <!-- ============================================== -->
-    <!-- 3. RUNNING TEXT (FROSTED GLASS PILL)           -->
-    <!-- ============================================== -->
-    <div class="ticker-glass-pill">
-      <div class="ticker-icon-chip">📢 INFO</div>
-      <div class="ticker-track">
-        <div class="ticker-text">
-          🔥 WELCOME TO LIVE STREAM <span class="highlight-blue">@rranggaz_</span>!  •  
-          <span class="highlight-gold">TAP-TAP LAYAR & SHARE YA GUYS!</span>  •  
-          SUPPORT VIA SAWERIA: <span class="highlight-blue">saweria.co/rranggaz_</span>  •  
-          MABAR? SPAM NICK & ID DI CHAT!  •  
-          <span class="highlight-purple">TERIMA KASIH YANG SUDAH FOLLOW & MAMPIR! ✨</span>
-        </div>
-      </div>
-    </div>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Check URL Parameters for Modes (?mode=transparent or ?mode=preview)
+      const urlParams = new URLSearchParams(window.location.search);
+      const modeParam = urlParams.get('mode');
+      if (modeParam === 'transparent') {
+        document.body.classList.add('mode-transparent');
+        streamConfig.mode = 'TRANSPARENT_OVERLAY';
+      }
 
-    <!-- ============================================== -->
-    <!-- 4. BOTTOM SECTION: SAWERIA CARD & CHAT BACKDROP -->
-    <!-- ============================================== -->
-    <footer class="bottom-content-grid">
-      <!-- Left: Minimalist Stats + Clean Chat Space -->
-      <div class="left-glass-panel">
-        <div class="stats-chips-row">
-          <div class="glass-stat-card">
-            <span class="stat-label">WIN STREAK</span>
-            <span class="stat-val fire">🔥 9 WINS</span>
-          </div>
-          <div class="glass-stat-card">
-            <span class="stat-label">MOBILE LEGENDS</span>
-            <span class="stat-val">MAGIC CHESS</span>
-          </div>
-        </div>
+      // Hide gear icon if in OBS mode (?obs=true)
+      if (urlParams.get('obs') === 'true') {
+        setTimeout(() => {
+          const gear = document.getElementById('gearToggleBtn');
+          if (gear) gear.style.display = 'none';
+        }, 100);
+      }
 
-        <!-- Clean Frosted Chat Backdrop for Real TikTok Comments -->
-        <div class="chat-backdrop-frame">
-          <div class="chat-frame-header">
-            <span class="live-chat-dot"></span>
-            <span>TIKTOK LIVE COMMENTS</span>
-          </div>
-          <div class="chat-native-hint">
-            Komentar asli dari penonton TikTok Anda akan tampil bersih dan mudah terbaca di area kaca transparan ini.
-          </div>
-          <div class="bottom-friendly-badge">
-            🌟 TAP-TAP LAYAR & ENJOY THE STREAM 🌟
-          </div>
-        </div>
-      </div>
+      // 2. Initialize Particle Animation Manager
+      const canvasEl = document.getElementById('particleCanvas');
+      const animManager = new AnimationManager(canvasEl, {
+        particleCount: streamConfig.animations.particleCount
+      });
+      animManager.start();
 
-      <!-- Right: Modern Frosted Saweria Card -->
-      <div class="saweria-glass-card">
-        <div class="saweria-badge-title">SCAN TO SUPPORT</div>
-        <div class="qr-card-viewport">
-          <div class="clean-scan-beam"></div>
-          <img src="sample_qr.png" alt="Saweria QRIS">
-        </div>
-        <div class="saweria-url-link">saweria.co/rranggaz_</div>
-      </div>
-    </footer>
+      // 3. Mount UI Components
+      const headerComp = new HeaderComponent(document.getElementById('headerComponentContainer'));
+      headerComp.render();
 
-  </div>
+      const heroComp = new HeroLayerComponent(document.getElementById('heroComponentContainer'));
+      heroComp.render();
 
-  <script>
-    // Real-Time Clock
-    const clockEl = document.getElementById('clockEl');
-    function updateClock() {
-      const now = new Date();
-      const h = String(now.getHours()).padStart(2, '0');
-      const m = String(now.getMinutes()).padStart(2, '0');
-      const s = String(now.getSeconds()).padStart(2, '0');
-      clockEl.textContent = `${h}:${m}:${s}`;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
+      const gameplayComp = new GameplayFrameComponent(document.getElementById('gameplayComponentContainer'));
+      gameplayComp.render();
+
+      const tickerComp = new TickerBarComponent(document.getElementById('tickerComponentContainer'));
+      tickerComp.render();
+
+      const webcamComp = new WebcamFrameComponent(document.getElementById('webcamComponentContainer'));
+      webcamComp.render();
+
+      const chatComp = new ChatPanelComponent(document.getElementById('chatComponentContainer'));
+      chatComp.render();
+
+      const infoCardsComp = new InfoCardsComponent(document.getElementById('infoCardsComponentContainer'));
+      infoCardsComp.render();
+
+      const settingsComp = new SettingsPanelComponent(document.getElementById('settingsComponentContainer'), {
+        onUpdate: () => {}
+      });
+      settingsComp.render();
+
+      console.log('RANZ GAMING Mobile Legends Overlay initialized successfully!');
+    });
   </script>
 </body>
 </html>
