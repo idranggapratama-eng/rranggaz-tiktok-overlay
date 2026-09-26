@@ -2,24 +2,24 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RRANGGAZ_ Live Overlay V2 (Clean & Pro)</title>
+  <meta name="viewport" content="width=1080, height=1920, initial-scale=1.0">
+  <title>RRANGGAZ_ TikTok Live Overlay</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@600;700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@600;700;800&family=Inter:wght@500;700&display=swap" rel="stylesheet">
   
   <style>
     /* ========================================================
-       RRANGGAZ_ TIKTOK LIVE HUD V2 - CLEAN, FIT & EPIC (60 FPS)
-       Designed specifically for TikTok Live Studio & OBS
+       RRANGGAZ_ TIKTOK LIVE VERTICAL HUD (1080 x 1920)
+       NO DUMMY CHAT • NO FAKE CAM • PURE CLEAN ESPORTS AESTHETIC
        ======================================================== */
 
     :root {
       --cyan: #00f0ff;
       --purple: #9d00ff;
-      --pink: #ff007f;
+      --pink: #ff0055;
       --gold: #ffd700;
-      --glow-cyan: 0 0 15px rgba(0, 240, 255, 0.7), 0 0 30px rgba(0, 240, 255, 0.4);
+      --glow-cyan: 0 0 15px rgba(0, 240, 255, 0.6), 0 0 30px rgba(0, 240, 255, 0.3);
       --font-hud: 'Orbitron', -apple-system, sans-serif;
       --font-sub: 'Rajdhani', sans-serif;
       --font-ui: 'Inter', sans-serif;
@@ -32,421 +32,459 @@
       user-select: none;
     }
 
+    /* STRICT 1080x1920 CANVAS FOR TIKTOK LIVE STUDIO */
     html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
+      width: 1080px;
+      height: 1920px;
+      min-width: 1080px;
+      min-height: 1920px;
+      max-width: 1080px;
+      max-height: 1920px;
       overflow: hidden;
-      background: transparent; /* Allows transparency in OBS */
+      background: transparent;
       font-family: var(--font-ui);
       color: #fff;
     }
 
-    /* FULL CANVAS WRAPPER (1080 x 1920 ratio, auto-fits 100% viewport) */
-    .live-canvas {
-      width: 100vw;
-      height: 100vh;
-      max-width: 1080px;
-      max-height: 1920px;
+    .canvas-container {
+      width: 1080px;
+      height: 1920px;
+      position: relative;
+      overflow: hidden;
+      background-color: #060814;
+    }
+
+    /* ========================================================
+       1. BACKGROUND: HIGH-END CYBERPUNK ARENA
+       ======================================================== */
+    .bg-cyber-arena {
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      margin: auto;
-      overflow: hidden;
-      display: grid;
-      grid-template-rows: 24% 34% 42%; /* Golden ratio layout for 9:16 */
-      background: #060913;
-    }
-
-    /* ========================================================
-       BACKGROUND: CLEAN CYBERPUNK STAGE (NO AI TEXT)
-       ======================================================== */
-    .bg-stage-layer {
-      position: absolute;
-      inset: 0;
+      width: 1080px;
+      height: 1920px;
       background-image: url('clean_cyber_bg.jpg');
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
       z-index: 1;
     }
 
-    /* Animated Ambient Glow Sweep */
-    .ambient-pulse {
+    /* Ambient Pulsing Lighting */
+    .ambient-glow-layer {
       position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 18%, rgba(0, 240, 255, 0.18) 0%, transparent 55%),
-                  radial-gradient(circle at 50% 82%, rgba(157, 0, 255, 0.18) 0%, transparent 60%);
-      pointer-events: none;
-      z-index: 2;
-      animation: ambientGlow 4s infinite ease-in-out alternate;
-    }
-
-    /* Floating Dust Particles */
-    #particleCanvas {
-      position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
+      background: radial-gradient(circle at 50% 12%, rgba(0, 240, 255, 0.22) 0%, transparent 50%),
+                  radial-gradient(circle at 50% 88%, rgba(157, 0, 255, 0.22) 0%, transparent 55%);
+      z-index: 2;
       pointer-events: none;
+      animation: ambientBreath 4s ease-in-out infinite alternate;
+    }
+
+    /* Floating Stardust Canvas */
+    #dustCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1080px;
+      height: 1920px;
       z-index: 3;
+      pointer-events: none;
     }
 
     /* ========================================================
-       1. TOP SECTION: CLEAN STREAMER IDENTITY (Y: 0 - 24%)
+       2. TOP HEADER: CLEAN GLOWING STREAMER IDENTITY (Y: 0 - 520px)
        ======================================================== */
-    .top-section {
-      position: relative;
+    .header-zone {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1080px;
+      height: 520px;
       z-index: 10;
-      padding: 35px 30px 10px 30px;
+      padding: 40px 50px 0 50px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       align-items: center;
+      justify-content: flex-start;
+      gap: 25px;
     }
 
-    /* Minimal Top Safe Meta Pill */
-    .top-meta-row {
+    /* Top Safe Status Bar */
+    .top-status-bar {
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(6, 10, 20, 0.75);
-      border: 1px solid rgba(0, 240, 255, 0.3);
+      background: rgba(6, 10, 22, 0.85);
+      border: 1px solid rgba(0, 240, 255, 0.35);
       border-radius: 30px;
-      padding: 8px 20px;
-      backdrop-filter: blur(8px);
+      padding: 10px 28px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
     }
 
-    .live-badge {
+    .live-pill {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-family: var(--font-hud);
-      font-size: 13px;
-      font-weight: 800;
-      color: #ff0055;
-      letter-spacing: 1.5px;
-    }
-
-    .live-dot {
-      width: 10px;
-      height: 10px;
-      background: #ff0055;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055;
-      animation: blinkDot 1s infinite alternate;
-    }
-
-    .clock-display {
+      gap: 10px;
       font-family: var(--font-hud);
       font-size: 15px;
-      font-weight: 700;
-      color: var(--cyan);
+      font-weight: 800;
+      color: #ff0055;
       letter-spacing: 2px;
     }
 
-    .fps-tag {
+    .live-dot {
+      width: 12px;
+      height: 12px;
+      background: #ff0055;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #ff0055, 0 0 24px #ff0055;
+      animation: dotPulse 1s infinite alternate;
+    }
+
+    .clock-text {
+      font-family: var(--font-hud);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: 3px;
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+    }
+
+    .fps-badge {
       font-family: var(--font-sub);
-      font-size: 15px;
+      font-size: 18px;
       font-weight: 800;
       color: #00ffaa;
       letter-spacing: 1px;
     }
 
-    /* MAIN STREAMER EMBLEM (CLEAN & GORGEOUS) */
-    .streamer-hero-banner {
+    /* Big Glowing Streamer Title */
+    .streamer-hero {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      position: relative;
-      margin-top: 10px;
+      margin-top: 15px;
     }
 
-    .neon-streamer-name {
+    .streamer-glow-name {
       font-family: var(--font-hud);
-      font-size: 52px;
+      font-size: 68px;
       font-weight: 900;
-      letter-spacing: 6px;
+      letter-spacing: 8px;
       text-transform: uppercase;
       color: #ffffff;
       text-shadow: 
         0 0 10px #00f0ff,
         0 0 25px #00f0ff,
         0 0 50px #9d00ff,
-        0 0 90px #9d00ff;
-      animation: neonPulse 3s infinite alternate;
+        0 0 100px #9d00ff;
+      animation: neonGlow 3s infinite alternate;
       line-height: 1.1;
     }
 
-    .sub-brand-row {
+    .hero-meta-pills {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-top: 8px;
+      gap: 16px;
+      margin-top: 14px;
     }
 
-    .rank-pill {
+    .pill-item {
       font-family: var(--font-hud);
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 800;
+      padding: 6px 20px;
+      border-radius: 25px;
+      letter-spacing: 1.5px;
+    }
+
+    .pill-gold {
       color: #ffd700;
-      background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 120, 0, 0.2));
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 120, 0, 0.25));
       border: 1px solid #ffd700;
-      padding: 4px 16px;
-      border-radius: 20px;
-      box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
-      letter-spacing: 1px;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
     }
 
-    .tiktok-id-pill {
-      font-family: var(--font-hud);
-      font-size: 13px;
-      font-weight: 800;
+    .pill-cyan {
       color: var(--cyan);
       background: rgba(0, 240, 255, 0.15);
       border: 1px solid var(--cyan);
-      padding: 4px 16px;
-      border-radius: 20px;
-      letter-spacing: 1px;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
     }
 
     /* ========================================================
-       2. MIDDLE SECTION: 16:9 GAME HUD FRAME (Y: 24% - 58%)
-       100% TRANSPARENT IN OBS SO GAME SHOWS PERFECTLY!
+       3. MIDDLE: 16:9 GAME SCREEN WINDOW (Y: 530px - 1140px)
+       100% TRANSPARENT IN THE CENTER SO YOUR GAME SHINES!
        ======================================================== */
-    .game-section {
-      position: relative;
+    .game-zone {
+      position: absolute;
+      top: 530px;
+      left: 0;
+      width: 1080px;
+      height: 610px;
       z-index: 10;
-      padding: 0 16px;
+      padding: 0 20px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
     }
 
-    .game-viewport-frame {
-      width: 100%;
-      height: 100%;
+    /* The Cyber Frame around the game */
+    .game-frame-box {
+      width: 1040px;
+      height: 585px; /* 16:9 aspect ratio */
       position: relative;
       border: 3px solid var(--cyan);
-      border-radius: 8px;
-      box-shadow: var(--glow-cyan), inset 0 0 20px rgba(0, 240, 255, 0.2);
-      background: transparent; /* TRANSPARENT SO YOUR GAME UNDERNEATH SHOWS THROUGH */
-      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: var(--glow-cyan), inset 0 0 25px rgba(0, 240, 255, 0.2);
+      background: transparent; /* TRANSPARENT! GAME SHOWS THROUGH HERE */
     }
 
-    /* Sci-Fi Brackets on 4 Corners */
-    .hud-bracket {
+    /* Metallic Sci-Fi Corner Brackets */
+    .corner-bracket {
       position: absolute;
-      width: 28px;
-      height: 28px;
+      width: 34px;
+      height: 34px;
       border-color: #ffffff;
       border-style: solid;
       z-index: 15;
       pointer-events: none;
     }
-    .hb-tl { top: -4px; left: -4px; border-width: 5px 0 0 5px; }
-    .hb-tr { top: -4px; right: -4px; border-width: 5px 5px 0 0; }
-    .hb-bl { bottom: -4px; left: -4px; border-width: 0 0 5px 5px; }
-    .hb-br { bottom: -4px; right: -4px; border-width: 0 5px 5px 0; }
+    .cb-tl { top: -6px; left: -6px; border-width: 6px 0 0 6px; }
+    .cb-tr { top: -6px; right: -6px; border-width: 6px 6px 0 0; }
+    .cb-bl { bottom: -6px; left: -6px; border-width: 0 0 6px 6px; }
+    .cb-br { bottom: -6px; right: -6px; border-width: 0 6px 6px 0; }
 
     /* Animated Soundwave on Bottom Rim of Game */
-    .game-equalizer {
+    .game-soundwave {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 16px;
+      height: 18px;
       display: flex;
       align-items: flex-end;
       justify-content: space-around;
-      padding: 0 20px;
-      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.75));
+      padding: 0 30px;
+      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.8));
       z-index: 12;
       pointer-events: none;
     }
 
-    .eq-stick {
+    .wave-bar {
       width: 6px;
       background: var(--cyan);
       border-radius: 3px 3px 0 0;
-      box-shadow: 0 0 8px var(--cyan);
-      animation: eqJump 0.7s infinite alternate ease-in-out;
+      box-shadow: 0 0 10px var(--cyan);
+      animation: waveDance 0.8s infinite alternate ease-in-out;
     }
-    .eq-stick:nth-child(2n) { animation-duration: 0.4s; }
-    .eq-stick:nth-child(3n) { animation-duration: 0.9s; background: var(--purple); box-shadow: 0 0 8px var(--purple); }
-    .eq-stick:nth-child(4n) { animation-duration: 0.6s; }
-    .eq-stick:nth-child(5n) { animation-duration: 1.1s; background: #00ffaa; box-shadow: 0 0 8px #00ffaa; }
+    .wave-bar:nth-child(2n) { animation-duration: 0.5s; }
+    .wave-bar:nth-child(3n) { animation-duration: 1.1s; background: var(--purple); box-shadow: 0 0 10px var(--purple); }
+    .wave-bar:nth-child(4n) { animation-duration: 0.7s; }
+    .wave-bar:nth-child(5n) { animation-duration: 1.3s; background: #00ffaa; box-shadow: 0 0 10px #00ffaa; }
 
     /* ========================================================
-       3. BOTTOM SECTION: MOVING TEXT, STATS & SAWERIA QR (42%)
+       4. RUNNING TEXT BAR (TEKS BERGERAK) (Y: 1150px - 1215px)
        ======================================================== */
-    .bottom-section {
-      position: relative;
+    .ticker-bar-zone {
+      position: absolute;
+      top: 1150px;
+      left: 20px;
+      width: 1040px;
+      height: 65px;
       z-index: 10;
-      padding: 12px 20px 30px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    /* SMOOTH RUNNING TEXT / MARQUEE TICKER */
-    .ticker-container {
-      width: 100%;
-      background: rgba(10, 14, 25, 0.92);
-      border: 1px solid rgba(0, 240, 255, 0.5);
-      border-radius: 8px;
+      background: rgba(8, 12, 24, 0.95);
+      border: 2px solid rgba(0, 240, 255, 0.5);
+      border-radius: 10px;
       overflow: hidden;
       display: flex;
       align-items: center;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
     }
 
-    .ticker-badge {
+    .ticker-title-tag {
       background: linear-gradient(135deg, var(--purple), var(--cyan));
       color: #fff;
       font-family: var(--font-hud);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      padding: 10px 16px;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      padding: 0 24px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       white-space: nowrap;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
     }
 
-    .ticker-scroll-track {
+    .ticker-viewport {
       flex: 1;
       overflow: hidden;
       white-space: nowrap;
-      padding: 8px 0;
     }
 
-    .ticker-live-text {
+    .ticker-moving-content {
       display: inline-block;
       font-family: var(--font-sub);
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 2px;
       color: #ffffff;
       padding-left: 100%;
-      animation: infiniteMarquee 18s linear infinite;
+      animation: continuousScroll 22s linear infinite;
     }
 
-    .highlight-gold { color: #ffd700; }
-    .highlight-cyan { color: #00f0ff; }
-    .highlight-pink { color: #ff007f; }
+    .text-gold { color: #ffd700; }
+    .text-cyan { color: #00f0ff; }
+    .text-pink { color: #ff007f; }
 
-    /* LOWER CONTENT: STATS & NEON SAWERIA CARD */
-    .lower-content-grid {
-      display: grid;
-      grid-template-columns: 1fr 240px;
-      gap: 16px;
-      align-items: stretch;
-      flex: 1;
-    }
-
-    /* Left: Stats & TikTok Chat Container */
-    .left-column {
+    /* ========================================================
+       5. BOTTOM ZONE: CLEAN SAWERIA CARD & STATS (Y: 1240 - 1920px)
+       NO DUMMY CHAT! CLEAN & SPACIOUS FOR REAL TIKTOK CHAT!
+       ======================================================== */
+    .bottom-zone {
+      position: absolute;
+      top: 1240px;
+      left: 0;
+      width: 1080px;
+      height: 680px;
+      z-index: 10;
+      padding: 10px 30px 40px 30px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      justify-content: space-between;
     }
 
-    .stats-row {
+    .bottom-cards-row {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 24px;
+      align-items: stretch;
+      height: 100%;
+    }
+
+    /* Left: Streamer Badges & Clean Chat Space */
+    .bottom-left-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .stats-trio {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 14px;
     }
 
-    .stat-chip {
-      background: rgba(10, 14, 25, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-left: 4px solid var(--cyan);
-      border-radius: 8px;
-      padding: 8px 12px;
+    .stat-badge {
+      background: rgba(10, 14, 28, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-left: 5px solid var(--cyan);
+      border-radius: 10px;
+      padding: 12px 18px;
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 4px;
+      backdrop-filter: blur(8px);
     }
 
     .stat-title {
       font-family: var(--font-hud);
-      font-size: 10px;
+      font-size: 12px;
       color: #8b9bb4;
       letter-spacing: 1px;
     }
 
     .stat-val {
       font-family: var(--font-sub);
-      font-size: 17px;
+      font-size: 20px;
       font-weight: 800;
+      color: #fff;
     }
-    .stat-val.fire { color: #ff0055; font-family: var(--font-hud); font-size: 14px; }
-    .stat-val.social { color: var(--cyan); }
 
-    /* Glass Chat Container Frame */
-    .chat-glass-frame {
+    .stat-val.fire {
+      color: #ff0055;
+      font-family: var(--font-hud);
+      font-size: 17px;
+      text-shadow: 0 0 10px rgba(255, 0, 85, 0.6);
+    }
+    .stat-val.social {
+      color: var(--cyan);
+    }
+
+    /* Transparent Glass Chat Backdrop (Ready for real TikTok chat to scroll over) */
+    .real-chat-space {
       flex: 1;
-      background: rgba(8, 12, 22, 0.72);
-      border: 1px solid rgba(0, 240, 255, 0.3);
-      border-radius: 12px;
-      padding: 12px 16px;
+      background: rgba(8, 12, 24, 0.65);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      border-radius: 14px;
+      padding: 16px 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       backdrop-filter: blur(10px);
     }
 
-    .chat-header {
+    .chat-space-header {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      font-family: var(--font-hud);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--cyan);
+      letter-spacing: 1.5px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 10px;
+    }
+
+    .chat-pulse {
+      width: 10px;
+      height: 10px;
+      background: #00ff88;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00ff88;
+    }
+
+    .chat-space-placeholder {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.35);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 20px;
+      line-height: 1.5;
+    }
+
+    .bottom-cta-banner {
+      background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.15), transparent);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
       font-family: var(--font-hud);
       font-size: 12px;
       font-weight: 800;
       color: var(--cyan);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 6px;
+      letter-spacing: 1.5px;
     }
 
-    .chat-dot {
-      width: 8px;
-      height: 8px;
-      background: #00ff88;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #00ff88;
-    }
-
-    .chat-stream-box {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      gap: 8px;
-      padding: 8px 0;
-      overflow: hidden;
-    }
-
-    .chat-msg {
-      background: rgba(255, 255, 255, 0.04);
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 14px;
-      line-height: 1.3;
-    }
-    .chat-msg strong { color: #cedaff; }
-    .chat-msg span { color: #fff; }
-
-    /* Right: NEON SAWERIA QR CARD WITH SCANLINE */
-    .saweria-neon-card {
-      background: rgba(10, 14, 25, 0.92);
+    /* Right: GORGEOUS SAWERIA QR CARD WITH SCANLINE */
+    .saweria-card-box {
+      background: rgba(10, 14, 28, 0.95);
       border: 2px solid var(--cyan);
-      border-radius: 12px;
-      padding: 10px;
+      border-radius: 14px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -455,27 +493,27 @@
       box-shadow: var(--glow-cyan);
     }
 
-    .qr-card-title {
+    .saweria-header-text {
       font-family: var(--font-hud);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1px;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
       color: var(--cyan);
       text-align: center;
     }
 
-    .qr-holder {
-      width: 175px;
-      height: 175px;
+    .saweria-qr-frame {
+      width: 220px;
+      height: 220px;
       position: relative;
       background: #fff;
-      border-radius: 8px;
-      padding: 6px;
+      border-radius: 10px;
+      padding: 8px;
       overflow: hidden;
-      box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
     }
 
-    .qr-holder img {
+    .saweria-qr-frame img {
       width: 100%;
       height: 100%;
       object-fit: contain;
@@ -483,181 +521,179 @@
     }
 
     /* Laser scanline moving up & down */
-    .laser-line {
+    .laser-scan-beam {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 4px;
       background: linear-gradient(90deg, transparent, #00f0ff, #fff, #00f0ff, transparent);
-      box-shadow: 0 0 12px #00f0ff;
-      animation: laserMove 2.2s infinite alternate ease-in-out;
+      box-shadow: 0 0 12px #00f0ff, 0 0 20px #00f0ff;
+      animation: scanLaser 2.2s infinite alternate ease-in-out;
     }
 
-    .qr-link-sub {
+    .saweria-url-text {
       font-family: var(--font-sub);
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 800;
       color: #ffd700;
+      letter-spacing: 0.5px;
       text-align: center;
     }
 
     /* ========================================================
        KEYFRAME ANIMATIONS
        ======================================================== */
-    @keyframes infiniteMarquee {
+    @keyframes continuousScroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
 
-    @keyframes laserMove {
-      0% { top: 4px; }
-      100% { top: 165px; }
+    @keyframes scanLaser {
+      0% { top: 6px; }
+      100% { top: 210px; }
     }
 
-    @keyframes blinkDot {
+    @keyframes dotPulse {
       from { opacity: 1; transform: scale(1); }
-      to { opacity: 0.3; transform: scale(0.8); }
+      to { opacity: 0.3; transform: scale(0.85); }
     }
 
-    @keyframes neonPulse {
+    @keyframes neonGlow {
       0% {
         text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 40px #9d00ff;
       }
       100% {
-        text-shadow: 0 0 15px #00f0ff, 0 0 35px #00f0ff, 0 0 70px #9d00ff, 0 0 100px #9d00ff;
+        text-shadow: 0 0 15px #00f0ff, 0 0 35px #00f0ff, 0 0 70px #9d00ff, 0 0 110px #9d00ff;
       }
     }
 
-    @keyframes eqJump {
-      0% { height: 3px; }
-      100% { height: 15px; }
+    @keyframes waveDance {
+      0% { height: 4px; }
+      100% { height: 17px; }
     }
 
-    @keyframes ambientGlow {
+    @keyframes ambientBreath {
       0% { opacity: 0.7; }
-      100% { opacity: 1.2; }
+      100% { opacity: 1.25; }
     }
   </style>
 </head>
 <body>
 
-  <div class="live-canvas">
+  <div class="canvas-container">
     
-    <!-- 1. CLEAN CYBER ARENA BACKGROUND (NO TEXT) -->
-    <div class="bg-stage-layer"></div>
-    <div class="ambient-pulse"></div>
-    <canvas id="particleCanvas"></canvas>
+    <!-- 1. CLEAN CYBER ARENA BACKGROUND -->
+    <div class="bg-cyber-arena"></div>
+    <div class="ambient-glow-layer"></div>
+    <canvas id="dustCanvas"></canvas>
 
     <!-- ============================================== -->
-    <!-- 1. TOP SECTION: STREAMER IDENTITY (CLEAN)      -->
+    <!-- 2. TOP ZONE: CLEAN STREAMER IDENTITY           -->
     <!-- ============================================== -->
-    <header class="top-section">
+    <header class="header-zone">
       <!-- Status Meta Bar -->
-      <div class="top-meta-row">
-        <div class="live-badge">
+      <div class="top-status-bar">
+        <div class="live-pill">
           <span class="live-dot"></span>
           <span>LIVE BROADCAST</span>
         </div>
-        <div class="clock-display" id="clockEl">15:10:00</div>
-        <div class="fps-tag">1080P • 60 FPS</div>
+        <div class="clock-text" id="liveClock">15:15:00</div>
+        <div class="fps-badge">1080P • 60 FPS HD</div>
       </div>
 
-      <!-- Single Glowing Streamer Emblem -->
-      <div class="streamer-hero-banner">
-        <h1 class="neon-streamer-name">RRANGGAZ_</h1>
-        <div class="sub-brand-row">
-          <span class="rank-pill">⭐ MYTHIC IMMORTAL</span>
-          <span class="tiktok-id-pill">@rranggaz_</span>
+      <!-- Glowing Hero Title (RRANGGAZ_) -->
+      <div class="streamer-hero">
+        <h1 class="streamer-glow-name">RRANGGAZ_</h1>
+        <div class="hero-meta-pills">
+          <span class="pill-item pill-gold">⭐ MYTHIC IMMORTAL</span>
+          <span class="pill-item pill-cyan">TIKTOK: @rranggaz_</span>
         </div>
       </div>
     </header>
 
     <!-- ============================================== -->
-    <!-- 2. MIDDLE SECTION: 16:9 GAME HUD FRAME         -->
+    <!-- 3. MIDDLE ZONE: 16:9 GAME SCREEN WINDOW        -->
     <!-- ============================================== -->
-    <section class="game-section">
-      <div class="game-viewport-frame">
-        <div class="hud-bracket hb-tl"></div>
-        <div class="hud-bracket hb-tr"></div>
-        <div class="hud-bracket hb-bl"></div>
-        <div class="hud-bracket hb-br"></div>
+    <section class="game-zone">
+      <!-- 16:9 Transparent Cutout for Mobile Legends Game Capture -->
+      <div class="game-frame-box">
+        <div class="corner-bracket cb-tl"></div>
+        <div class="corner-bracket cb-tr"></div>
+        <div class="corner-bracket cb-bl"></div>
+        <div class="corner-bracket cb-br"></div>
 
         <!-- Equalizer Soundwave on bottom edge -->
-        <div class="game-equalizer">
-          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
-          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
-          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
-          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
-          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
-          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
-          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
-          <span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span><span class="eq-stick"></span>
+        <div class="game-soundwave">
+          <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
+          <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
+          <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
+          <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
+          <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
+          <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
+          <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
+          <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
         </div>
       </div>
     </section>
 
     <!-- ============================================== -->
-    <!-- 3. BOTTOM SECTION: MOVING TEXT & SAWERIA QR    -->
+    <!-- 4. RUNNING TEXT (TEKS BERGERAK)                -->
     <!-- ============================================== -->
-    <footer class="bottom-section">
-      <!-- SMOOTH RUNNING TICKER (TEKS BERGERAK) -->
-      <div class="ticker-container">
-        <div class="ticker-badge">INFO STREAM</div>
-        <div class="ticker-scroll-track">
-          <div class="ticker-live-text">
-            🔥 WELCOME TO LIVE STREAM <span class="highlight-cyan">@rranggaz_</span>!  •  
-            <span class="highlight-gold">TAP-TAP LAYAR & SHARE YA GUYS!</span>  •  
-            SUPPORT SAWERIA: <span class="highlight-cyan">saweria.co/rranggaz_</span>  •  
-            MABAR? SPAM NICK & ID DI CHAT!  •  
-            <span class="highlight-pink">TARGET HARI INI: PUSH MYTHIC GLORY 🔥</span>
-          </div>
+    <div class="ticker-bar-zone">
+      <div class="ticker-title-tag">📢 INFO</div>
+      <div class="ticker-viewport">
+        <div class="ticker-moving-content">
+          🔥 WELCOME TO LIVE STREAM <span class="text-cyan">@rranggaz_</span>!  •  
+          <span class="text-gold">TAP-TAP LAYAR & SHARE YA GUYS!</span>  •  
+          SUPPORT SAWERIA: <span class="text-cyan">saweria.co/rranggaz_</span>  •  
+          MABAR? SPAM NICK & ID DI CHAT!  •  
+          <span class="text-pink">ENJOY THE GAMEPLAY & PUSH RANK! 🔥</span>
         </div>
       </div>
+    </div>
 
-      <!-- LOWER GRID: STATS + NEON SAWERIA CARD -->
-      <div class="lower-content-grid">
-        <div class="left-column">
-          <!-- Stats Chips -->
-          <div class="stats-row">
-            <div class="stat-chip">
+    <!-- ============================================== -->
+    <!-- 5. BOTTOM ZONE: CLEAN SAWERIA CARD & BADGES    -->
+    <!-- ============================================== -->
+    <footer class="bottom-zone">
+      <div class="bottom-cards-row">
+        <!-- Left: Badges & Real Chat Space -->
+        <div class="bottom-left-panel">
+          <div class="stats-trio">
+            <div class="stat-badge">
               <span class="stat-title">WIN STREAK</span>
               <span class="stat-val fire">🔥 9 WINS</span>
             </div>
-            <div class="stat-chip">
+            <div class="stat-badge">
               <span class="stat-title">TIKTOK OFFICIAL</span>
               <span class="stat-val social">@rranggaz_</span>
             </div>
           </div>
 
-          <!-- Glass Chat Box Container -->
-          <div class="chat-glass-frame">
-            <div class="chat-header">
-              <span class="chat-dot"></span>
+          <!-- Glass Chat Box (Ready for Real TikTok Live Chat) -->
+          <div class="real-chat-space">
+            <div class="chat-space-header">
+              <span class="chat-pulse"></span>
               <span>LIVE CHAT STREAM</span>
             </div>
-            <div class="chat-stream-box" id="chatStreamBox">
-              <div class="chat-msg">
-                <strong>SystemBot:</strong> <span>Selamat datang di live @rranggaz_! Jangan lupa tap-tap layar ya guys!</span>
-              </div>
-              <div class="chat-msg">
-                <strong>BangJago:</strong> <span>Alucardnya GG banget bang! Auto win ini mah 🔥</span>
-              </div>
-              <div class="chat-msg">
-                <strong>Sultan_ML:</strong> <span class="highlight-gold">🎁 Mengirimkan Mawar x100! Semangat bang!</span>
-              </div>
+            <div class="chat-space-placeholder">
+              Komentar penonton TikTok Anda akan mengalir rapi di area transparan ini.
+            </div>
+            <div class="bottom-cta-banner">
+              ⭐ TAP-TAP LAYAR & SHARE LIVE @rranggaz_ ⭐
             </div>
           </div>
         </div>
 
-        <!-- Integrated Neon Saweria Card -->
-        <div class="saweria-neon-card">
-          <div class="qr-card-title">SCAN TO SUPPORT</div>
-          <div class="qr-holder">
-            <div class="laser-line"></div>
-            <img src="sample_qr.png" alt="Saweria QRIS">
+        <!-- Right: Integrated Saweria QR Card -->
+        <div class="saweria-card-box">
+          <div class="saweria-header-text">SCAN TO SUPPORT</div>
+          <div class="saweria-qr-frame">
+            <div class="laser-scan-beam"></div>
+            <img src="sample_qr.png" alt="Saweria QR Code">
           </div>
-          <div class="qr-link-sub">saweria.co/rranggaz_</div>
+          <div class="saweria-url-text">saweria.co/rranggaz_</div>
         </div>
       </div>
     </footer>
@@ -665,8 +701,8 @@
   </div>
 
   <script>
-    // Live Digital Clock
-    const clockEl = document.getElementById('clockEl');
+    // Live Clock
+    const clockEl = document.getElementById('liveClock');
     function updateClock() {
       const now = new Date();
       const h = String(now.getHours()).padStart(2, '0');
@@ -677,69 +713,44 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Floating Cyber Stardust Particles
-    const canvas = document.getElementById('particleCanvas');
+    // Floating Stardust Particles
+    const canvas = document.getElementById('dustCanvas');
     const ctx = canvas.getContext('2d');
-    
-    function resizeCanvas() {
-      canvas.width = canvas.clientWidth;
-      canvas.height = canvas.clientHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    canvas.width = 1080;
+    canvas.height = 1920;
 
     const particles = [];
-    for (let i = 0; i < 35; i++) {
+    for (let i = 0; i < 40; i++) {
       particles.push({
         x: Math.random() * 1080,
         y: Math.random() * 1920,
         r: Math.random() * 2 + 1,
         color: Math.random() > 0.5 ? 'rgba(0, 240, 255, ' : 'rgba(157, 0, 255, ',
-        sy: -(Math.random() * 0.8 + 0.3),
-        sx: (Math.random() - 0.5) * 0.4,
-        a: Math.random() * 0.6 + 0.2
+        sy: -(Math.random() * 0.9 + 0.3),
+        sx: (Math.random() - 0.5) * 0.5,
+        a: Math.random() * 0.7 + 0.2
       });
     }
 
-    function drawParticles() {
+    function renderParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (let p of particles) {
         p.y += p.sy;
         p.x += p.sx;
         if (p.y < 0) {
-          p.y = canvas.height;
-          p.x = Math.random() * canvas.width;
+          p.y = 1920;
+          p.x = Math.random() * 1080;
         }
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = p.color + p.a + ')';
-        ctx.shadowBlur = 6;
+        ctx.shadowBlur = 8;
         ctx.shadowColor = p.color + '1)';
         ctx.fill();
       }
-      requestAnimationFrame(drawParticles);
+      requestAnimationFrame(renderParticles);
     }
-    drawParticles();
-
-    // Simulated Auto-Chat Stream
-    const chatBox = document.getElementById('chatStreamBox');
-    const sampleChats = [
-      { user: 'BocilMabar', text: 'Keren banget gameplay-nya bang! 🔥' },
-      { user: 'Siti_ML', text: 'Udah tap-tap 1000 likes bang!' },
-      { user: 'Rizky_Pro', text: 'Izin tiru combo dan build-nya bang @rranggaz_ 😎' },
-      { user: 'DepokPride', text: 'Auto Mythic Glory hari ini mah!' }
-    ];
-
-    setInterval(() => {
-      const c = sampleChats[Math.floor(Math.random() * sampleChats.length)];
-      const div = document.createElement('div');
-      div.className = 'chat-msg';
-      div.innerHTML = `<strong>${c.user}:</strong> <span>${c.text}</span>`;
-      chatBox.appendChild(div);
-      if (chatBox.children.length > 4) {
-        chatBox.removeChild(chatBox.children[0]);
-      }
-    }, 6000);
+    renderParticles();
   </script>
 </body>
 </html>
